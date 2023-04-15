@@ -81,6 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'dsaapp-db',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017/?retryWrites=true&w=majority'
+        }  
     }
 }
 
