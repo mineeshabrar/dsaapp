@@ -1,0 +1,47 @@
+student 
+{
+     id : 19105053 {
+        name: "mineesha",
+        proficiency : "robotics",
+        clubs: ["saasc", "peb", "robotics"],
+        participation: ["ev1", "ev2", "ev3", "ev4", "ev5", "ev6", "ev7", "ev8"]
+    },
+    {
+        name: "mineesha",
+        sid : 19105053
+        proficiency : "robotics",
+        clubs: ["saasc", "peb", "robotics"],
+        participation: ["ev1", "ev2", "ev3", "ev4", "ev5", "ev6", "ev7", "ev8"]
+    },
+    {
+        name: "mineesha",
+        sid : 19105053
+        proficiency : "robotics",
+        clubs: ["saasc", "peb", "robotics"],
+        participation: ["ev1", "ev2", "ev3", "ev4", "ev5", "ev6", "ev7", "ev8"]
+    }
+}
+
+club 
+{
+    {
+        "music": [ev1, ev2, ev3, ev4, ev5, ev6, ev7, ev8]
+    },
+    {
+        "peb": [ev4, ev9]
+    }
+}
+
+event_attendance 
+{
+    {
+        "event id" : ev1,
+        "name": "dastak",
+        "attendance" : [19105053, 19105054]
+    },
+    {
+        "event id" : ev4,
+        "name": "dastak",
+        "attendance" : [19105053, 19105054]
+    }
+}

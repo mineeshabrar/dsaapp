@@ -15,13 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from student.views import *
+from heads.views import *
 from authentication.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', login_view),
-    path('student/', student_view_data), 
-    path('log_out', log_out) 
+    path('login/student/', student_view_data), 
+    path('login/head/', head_view_data),
+    path('log_out', log_out),
+    path('login/', include('django.contrib.auth.urls')),
+    path('login/', include('authentication.urls')),
 ]
