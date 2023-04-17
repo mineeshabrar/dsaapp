@@ -1,0 +1,108 @@
+{
+  "students": [
+    {
+      "name": "mineesha",
+      "sid": "19105053",
+      "proficiency": "robotics",
+      "clubs": [
+        "saasc",
+        "peb",
+        "robotics"
+      ],
+      "event_ids": [
+        "ev1",
+        "ev2",
+        "ev3",
+        "ev4",
+        "ev5",
+        "ev6",
+        "ev7",
+        "ev8"
+      ]
+    },
+    {
+      "name": "mineesha",
+      "sid": "19105053",
+      "proficiency": "robotics",
+      "clubs": [
+        "saasc",
+        "peb",
+        "robotics"
+      ],
+      "event_ids": [
+        "ev1",
+        "ev2",
+        "ev3",
+        "ev4",
+        "ev5",
+        "ev6",
+        "ev7",
+        "ev8"
+      ]
+    },
+    {
+      "name": "mineesha",
+      "sid": "19105053",
+      "proficiency": "robotics",
+      "clubs": [
+        "saasc",
+        "peb",
+        "robotics"
+      ],
+      "event_ids": [
+        "ev1",
+        "ev2",
+        "ev3",
+        "ev4",
+        "ev5",
+        "ev6",
+        "ev7",
+        "ev8"
+      ]
+    }
+  ]
+}
+
+{
+  "clubs": [
+    {
+      "music": [
+        "ev1",
+        "ev2",
+        "ev3",
+        "ev4",
+        "ev5",
+        "ev6",
+        "ev7",
+        "ev8"
+      ]
+    },
+    {
+      "peb": [
+        "ev4",
+        "ev9"
+      ]
+    }
+  ]
+}
+
+{
+  "events": [
+    {
+      "event_id": "ev1",
+      "name": "dastak",
+      "attendance": [
+        "19105053",
+        "19105054"
+      ]
+    },
+    {
+      "event_id": "ev4",
+      "name": "dastak",
+      "attendance": [
+        "19105053",
+        "19105054"
+      ]
+    }
+  ]
+}
