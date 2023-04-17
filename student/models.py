@@ -4,19 +4,27 @@ from .models import *
 
 class student(models.Model):
     sid = models.IntegerField(unique=True)
-    details = models.JSONField()
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    #branch = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
     def __str__(self):
-        return str(self.sid)
+        return self.first_name
+    
+class societies(models.Model):
+    student_details = models.ForeignKey(student, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    proficiency = models.BooleanField()   ## add the function for unique proficiency
+    def __str__(self):
+        return self.name
+    
+class events(models.Model):
+     student_details = models.ForeignKey(societies, on_delete=models.CASCADE)
+     event_name = models.CharField(max_length=100)   
+     def __str__(self):
+        return self.event_name
 
-class club(models.Model):
-    club_id = models.CharField(unique=True, max_length=30)
-    details = models.JSONField()
-    def __str__(self):
-        return self.club_id
 
-class event(models.Model):
-    event_id = models.CharField(unique=True, max_length=500)
-    details = models.JSONField()
-    def __str__(self):
-        return self.event_id
+
 
