@@ -1,8 +1,7 @@
-"""
-URL configuration for dsaapp project.
+"""majorProject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -18,12 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from student.views import *
 from authentication.views import *
-#from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login_view),
-    path('student/', student_view_data),  
-    path('', include('social_django.urls', namespace='social')),
-    path('logout/', logout_view),
+    path('student/', student_view_data), 
+    path('accounts/', include("allauth.urls")),
+    path('logout/', logout_view)
 ]

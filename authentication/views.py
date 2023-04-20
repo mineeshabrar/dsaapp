@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def login_view(request):
     if request.user.is_authenticated:
-        print(request.user)
         return render(request, 'student_home_page.html')
     
     else:
