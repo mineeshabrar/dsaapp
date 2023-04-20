@@ -3,10 +3,26 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+from pymongo import MongoClient
+
+
 def login_view(request):
     if request.user.is_authenticated:
-        return render(request, 'student_home_page.html')
+        connection_string = "mongodb://localhost:27017/?retryWrites=true&w=majority"
+
+        client = MongoClient(connection_string)
+        db = client['dsaapp-db']
+        collection_name = db["student_student"]
+
+        students = collection_name.find({})
+        for student in students:
+            student = student['students'][0]
+            if student['email'] == request.user.email:
+                name = student['name']
+                sid = student['sid']
+                prof = student['prof']
+            
+        return render(request, 'student_home_page.html', {'name': name, 'sid': sid, 'prof': prof})
     
     else:
         return render(request, 'login.html')
