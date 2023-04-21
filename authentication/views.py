@@ -15,12 +15,19 @@ def login_view(request):
         collection_name = db["student_student"]
 
         students = collection_name.find({})
-        for student in students:
-            student = student['students'][0]
-            if student['email'] == request.user.email:
-                name = student['name']
-                sid = student['sid']
-                prof = student['prof']
+        # students is dictionary which has 2 elements { id and students }, students has a list of all students inside
+
+        for stds in students:
+            stds = stds['students']
+            # stds now is the list of all students
+            for student in stds:
+
+                # student now goes through the whole list to look for data with that specific id 
+                if student['email'] == request.user.email:
+                    name = student['name']
+                    sid = student['sid']
+                    prof = student['prof']
+            
             
         return render(request, 'student_home_page.html', {'name': name, 'sid': sid, 'prof': prof})
     
