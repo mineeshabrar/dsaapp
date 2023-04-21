@@ -15,6 +15,7 @@ for student in students:
 #     {
 #       "sid": "19105115",
 #       "name": "Aabhas",
+#       "email": "aabhaschopra.bt19ele@pec.edu.in"
 #       "prof": "saasc",
 #       "event_ids": [
 #         "ev1",
@@ -24,6 +25,7 @@ for student in students:
 #     {
 #       "sid": "19105123",
 #       "name": "Annchit",
+#       "email": "annchitbhatnagar.bt19mech@pec.edu.in"
 #       "prof": "music",
 #       "event_ids": [
 #         "mus1",
