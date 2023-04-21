@@ -15,14 +15,13 @@ def login_view(request):
         collection_name = db["student_student"]
 
         students = collection_name.find({})
-        # students is dictionary which has 2 elements { id and students }, students has a list of all students inside
 
-        for stds in students:
-            stds = stds['students']
-            # stds now is the list of all students
-            for student in stds:
+        # students is dictionary which has 2 elements { _id and students }
+        for s in students:
+            # s is the list of all students
+            s = s['students']
 
-                # student now goes through the whole list to look for data with that specific id 
+            for student in s:
                 if student['email'] == request.user.email:
                     name = student['name']
                     sid = student['sid']
