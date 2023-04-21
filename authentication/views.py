@@ -27,11 +27,12 @@ def login_view(request):
                     name = student['name']
                     sid = student['sid']
                     prof = student['prof']
-            
-            
-        return render(request, 'student_home_page.html', {'name': name, 'sid': sid, 'prof': prof})
+                    return redirect(f'student/{name}/{sid}/{prof}')
+                
+        return render(request, 'login.html')
     
     else:
+        logout(request)
         return render(request, 'login.html')
 
 @login_required
