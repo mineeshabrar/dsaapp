@@ -26,33 +26,21 @@
         </div>
       </nav>
 
-                            <div class="container-fluid">
-                                <div class="col-md-8">
-                                <div class="card mt-5">
-                                    <form>
-                                        {% for student in students %}
-                                            <input type="checkbox">
-                                            <label>{{ student.sid}} {{ student.name}} {{ student.prof}}</label><br>
-                                        {% endfor %}
-                                        
-                                      </form>
-                                    <!-- {% for student in students %}
-                                    <h5 class="card-header">{{ student }}</h5>
-                                    {% endfor %} -->
-                                    <!-- <h5 class="card-header">{{ name }}</h5>
+      <div class="container-fluid">
+          <div class="col-md-8">
+          <div class="card mt-5">
+              <form>
+                  {% for student in students %}
+                      <input type="checkbox">
+                      <label>{{ student.sid}} {{ student.name}} {{ student.prof}}</label><br>
+                  {% endfor %}
+                  
+                </form>
+          </div>
 
-                                    <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">SID: {{ sid }}</li>
-                                    <li class="list-group-item">Branch: ECE</li>
-                                    <li class="list-group-item">
-                                        Proficiency: {{ prof }}
-                                    </li>
-                                    </ul> -->
-                                </div>
-
-                                <div class="col-md-4"></div>
-                                </div>
-                            </div>
+          <div class="col-md-4"></div>
+          </div>
+      </div>
 
     </section>
   </body>
