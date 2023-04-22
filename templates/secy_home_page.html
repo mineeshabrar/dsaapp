@@ -37,11 +37,22 @@
           </form>
         </div>
 
-        <div class="col-md-4"></div>
+      <div class="container-fluid">
+          <div class="col-md-8">
+          <div class="card mt-5">
+              <form>
+                  {% for student in students %}
+                      <input type="checkbox">
+                      <label>{{ student.sid}} {{ student.name}} {{ student.prof}}</label><br>
+                  {% endfor %}
+                  
+                </form>
+          </div>
+
+          <div class="col-md-4"></div>
+          </div>
       </div>
-    </div>
 
-  </section>
-</body>
-
+    </section>
+  </body>
 </html>
