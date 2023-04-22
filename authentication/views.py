@@ -7,6 +7,7 @@ from pymongo import MongoClient
 
 
 def login_view(request):
+    list(messages.get_messages(request))
     if request.user.is_authenticated:
         connection_string = "mongodb://localhost:27017/?retryWrites=true&w=majority"
         client = MongoClient(connection_string)

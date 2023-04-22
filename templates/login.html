@@ -14,11 +14,11 @@
   <body>
 
     {% if messages %}
-      {% for message in messages %}
+      {% comment %} {% for message in messages %} {% endcomment %}
         <div class="alert alert-danger mb-0" role="alert">
           Please login with pec.edu.in
         </div>
-      {% endfor %}
+      {% comment %} {% endfor %} {% endcomment %}
     {% endif %}
 
     <section
