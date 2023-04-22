@@ -11,28 +11,39 @@ for student in students:
     print(student)
 
 
-# "students": [
+# {
+#   "students": [
 #     {
 #       "sid": "19105115",
 #       "name": "Aabhas",
-#       "email": "aabhaschopra.bt19ele@pec.edu.in"
 #       "prof": "saasc",
-#       "event_ids": [
+#       "email": "aabhaschopra.bt19ele@pec.edu.in",
+#       "event_organization": [
 #         "ev1",
 #         "ev2"
-#       ]
+#       ],
+#       "event_participation": [
+#         "ev3"
+#       ],
+#       "points": ""
 #     },
 #     {
 #       "sid": "19105123",
 #       "name": "Annchit",
-#       "email": "annchitbhatnagar.bt19mech@pec.edu.in"
 #       "prof": "music",
-#       "event_ids": [
+#       "email": "annchitbhatnagar.bt19mech@pec.edu.in",
+#       "event_organization": [
 #         "mus1",
 #         "mus2"
-#       ]
+#       ],
+#       "event_participation": [
+#         "mus3",
+#         "mus4"
+#       ],
+#       "points": ""
 #     }
 #   ]
+# }
 
 
 
@@ -63,3 +74,10 @@ for student in students:
 #     "19105053",
 #     "19105118"
 #   ]
+
+
+
+
+# head_email
+#
+# {"emails" : ["aabhaschopra.bt19ele@pec.edu.in"]}

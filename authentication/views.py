@@ -35,13 +35,11 @@ def login_view(request):
                 for s in students:
                     # s is the list of all students
                     s = s['students']
-
+                    
                     for student in s:
                         if student['email'] == request.user.email:
-                            name = student['name']
-                            sid = student['sid']
-                            prof = student['prof']
-                            return redirect(f'student/{name}/{sid}/{prof}')
+                            # return redirect(f'student/{student}')
+                            return render(request, 'student_home_page.html', {"student": student})
                         
                 return render(request, 'login.html')
     
