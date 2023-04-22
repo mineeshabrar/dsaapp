@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from student.views import *
 from authentication.views import *
+from heads.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login_view),
     path('student/<str:name>/<str:sid>/<str:prof>/', student_view_data),
     path('accounts/', include("allauth.urls")),
+    path('secy/',secy_view),
     re_path(r'^.*logout\/$', logout_view)
 ]

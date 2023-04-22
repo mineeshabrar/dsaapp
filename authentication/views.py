@@ -19,13 +19,7 @@ def login_view(request):
             h = h["emails"]
 
             if request.user.email in h:
-                collection_name = db["student_student"]
-                students = collection_name.find({})
-
-                for s in students:
-                    s = s['students']
-
-                return render(request, 'secy_home_page.html', {"students": s})
+                return redirect('secy/')
         
             else:
                 collection_name = db["student_student"]
