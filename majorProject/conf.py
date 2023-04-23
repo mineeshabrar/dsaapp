@@ -1,0 +1,1 @@
+connection_string = "mongodb://localhost:27017/?retryWrites=true&w=majority"
