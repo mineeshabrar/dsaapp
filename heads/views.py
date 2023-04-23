@@ -6,10 +6,7 @@ client = MongoClient(connection_string)
 db = client['dsaapp-db']
 
 def isHead(request):
-    print("*********************")
-
     collection_name = db["head_email"]
-    print("*********************")
 
     head_emails = collection_name.find({})
     for h in head_emails:
