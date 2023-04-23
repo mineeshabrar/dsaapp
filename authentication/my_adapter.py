@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.contrib import messages
 

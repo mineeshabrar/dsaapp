@@ -17,6 +17,9 @@ def isHead(request):
 
         if request.user.email in h:
             return True
+        
+        else:
+            return False
 
 
 def secy_view(request):

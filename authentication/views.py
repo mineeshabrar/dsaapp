@@ -20,7 +20,7 @@ def login_view(request):
             return redirect('secy/')
         
         else:
-            return redirect(f'student/')
+            return redirect('student/')
                         
     else:
         logout(request)

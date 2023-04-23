@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from majorProject.conf import connection_string
 
 
-def student_view_data(request, name = None, sid = None, prof = None):
+def student_view_data(request):
     client = MongoClient(connection_string)
         
     db = client['dsaapp-db']
@@ -20,5 +20,6 @@ def student_view_data(request, name = None, sid = None, prof = None):
                 sid = student['sid']
                 prof = student['prof']
                 # return redirect(f'student/{name}/{sid}/{prof}')
-                return render(request, 'nav_bar_student.html', {"name": name, "sid": sid, "prof": prof})
-
+                return render(request, 'nav_bar_student.html', {"name": name, "sid": sid, "prof": prof,})
+            
+    return render(request, 'nav_bar_student.html', {"name": None, "sid": None, "prof": None,})
