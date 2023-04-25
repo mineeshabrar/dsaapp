@@ -19,8 +19,8 @@ def isDSA(request):
             return False
 
 
-def add_event(request):
-    return render(request, 'dsa_home_page.html')
+def dsa_add_event(request):
+    return render(request, 'add_event.html')
 
 
 def dsa_view(request):

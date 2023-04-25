@@ -27,11 +27,11 @@ urlpatterns = [
     path('student/<str:sid>/', student_final_view_data),
     path('accounts/', include("allauth.urls")),
     path('secy/', secy_view),
-    path('secy_add_event', add_event),
+    path('secy/add_event/', secy_add_event),
     path('secy/<str:event_id>', event_details),
     path('secy/saveData/', secy_add_event_data, name= 'saveAddEventData'),
     path('dsa/', dsa_view),
-    path('dsa_add_event', add_event),
     path('dsa/<str:event_id>', event_details),
+    path('dsa/add_event/', dsa_add_event),
     re_path(r'^.*logout\/$', logout_view)
 ]

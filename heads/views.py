@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from pymongo import MongoClient
 from majorProject.conf import connection_string
+from bson import ObjectId
 
 client = MongoClient(connection_string)
 db = client['dsaapp-db']
@@ -23,8 +24,8 @@ def event_details(request, event_id):
     return render(request, 'event_view.html', {"event_id": event_id})
 
 
-def add_event(request):
-    return render(request, 'secy_home_page.html')
+def secy_add_event(request):
+    return render(request, 'add_event.html')
 
 
 def secy_view(request):
@@ -33,8 +34,8 @@ def secy_view(request):
     clubs = collection_name.find({})
     for c in clubs:
         c = c['clubs']
-        #return render(request, 'secy_landing_page.html', {"clubs" : c["saasc"]})
-        return render(request, 'secy_home_page.html')
+        return render(request, 'secy_landing_page.html', {"clubs" : c["aabhaschopra.bt19ele"]})
+        # return render(request, 'secy_home_page.html')
 
 def secy_add_event_data (request):
     if request.method == 'POST':
@@ -80,10 +81,11 @@ def secy_add_event_data (request):
                     }
 
                     print(new_event)
-
+                    c[club].append(new_event)
+                    collection_name.update({"_id": ObjectId("643a2f1c3cf4f996659f0737")}, {"clubs": c})
+                    print(c)
+                    break
                     #db.collection_names.updateOne({club_name}, {'$push' : new_event})
-
-
         
     return redirect('/secy/')
             
