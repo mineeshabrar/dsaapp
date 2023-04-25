@@ -33,4 +33,57 @@ def secy_view(request):
     clubs = collection_name.find({})
     for c in clubs:
         c = c['clubs']
-        return render(request, 'secy_landing_page.html', {"clubs" : c["saasc"]})
+        #return render(request, 'secy_landing_page.html', {"clubs" : c["saasc"]})
+        return render(request, 'secy_home_page.html')
+
+def secy_add_event_data (request):
+    if request.method == 'POST':
+        club_name = request.user.email.split('@')[0]
+        event_name = request.POST['EventName']
+        event_description = request.POST['EventDescription']
+
+        collection_name = db["student_societies"]
+
+        clubs = collection_name.find({})
+
+        for c in clubs:
+            c = c['clubs']
+
+            for club in c:
+                if(club == club_name):
+                    event_id = ""
+                    if(len(c[club]) == 1):
+                        event_id = club + str(2301)
+                    else:
+                        event_id_org = c[club][len(c[club]) - 1]['event_id']
+                        event_id = event_id_org[-2:]
+                        event_id = int(event_id) + 1
+
+                        if(event_id < 10):
+                            event_id = event_id_org[:-2] + "0" + str(event_id)
+
+                        else:
+                            event_id = event_id_org[:-2] + str(event_id)
+                    
+                    new_event = {
+                        "name": event_name,
+                        "description": event_description,
+                        "event_organization": [
+                         "19105115",
+                        "19105118"
+                         ],
+                         "event_participation": [
+                          "19105123",
+                          "19105113"
+                          ],
+                        "event_id": event_id,
+                    }
+
+                    print(new_event)
+
+                    #db.collection_names.updateOne({club_name}, {'$push' : new_event})
+
+
+        
+    return redirect('/secy/')
+            

@@ -46,16 +46,20 @@
           </div> -->
         <div class="col-md-8">
           <div class="container mt-5 me-5 px-3 py-3 pink-box">
-            <form class="row g-3" method="post" enctype="multipart/form-data">
+            <form class="row g-3" method="post" action="{% url 'saveAddEventData' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
               <div class="col-md-8">
+                <label for="eventName" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Name of the event" name="EventName">
+              </div>
+              <div class="col-md-8">
                 <label for="eventDescription" class="form-label">Event Description</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Describe the event">
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Describe the event" name="EventDescription">
               </div>
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Greater than 250 participants?</label>
-                <select id="participantsCheck" class="form-select">
+                <select id="participantsCheck" class="form-select" name="ParticipantCount">
                   <option selected>Yes</option>
                   <option>No</option>
                 </select>
@@ -71,7 +75,7 @@
                 <label for="inputAddress" class="form-label">Sanction Received from College</label>
                 <div class="input-group">
                   <div class="input-group-text">₹</div>
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Amount">
+                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Amount" name="CollegeSanction">
                 </div>
               </div>
               <div class="col-md-8">
@@ -83,7 +87,7 @@
               </div>
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Event Level</label>
-                <select id="participantsCheck" class="form-select">
+                <select id="participantsCheck" class="form-select" name="College">
                   <option selected>PEC</option>
                   <option>NIT</option>
 
@@ -97,12 +101,12 @@
                   <div class="mb-2">
                     <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Organisers)
                     </label>
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" id="formFile" name="OrgFile">
                     <br>
 
                     <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Participants)
                     </label>
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" id="formFile" name="ParticipationFile">
                   </div>
                 </div>
               </div>

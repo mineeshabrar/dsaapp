@@ -28,5 +28,6 @@ urlpatterns = [
     path('secy/', secy_view),
     path('secy_add_event', add_event),
     path('secy/<str:event_id>', event_details),
+    path('secy/saveData/', secy_add_event_data, name= 'saveAddEventData'),
     re_path(r'^.*logout\/$', logout_view)
 ]
