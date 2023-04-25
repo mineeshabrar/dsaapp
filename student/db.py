@@ -49,19 +49,25 @@ for student in students:
 
 
 
-# "clubs": {
+# {
+#   "clubs": {
 #     "saasc": [
-#       "saasc1",
-#       "saasc2"
-#     ],
-#     "music": [
-#       "mus1",
-#       "mus2",
-#       "mus3"
+#       {
+#         "event_id": "saasc2301",
+#         "name": "pecmun",
+#         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu",
+#         "event_organization": [
+#           "19105115",
+#           "19105118"
+#         ],
+#         "event_participation": [
+#           "19105123",
+#           "19105113"
+#         ]
+#       }
 #     ]
 #   }
-
-
+# }
 
 
 

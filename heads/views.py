@@ -20,9 +20,9 @@ def isHead(request):
 
 
 def secy_view(request):
-    collection_name = db["student_student"]
+    collection_name = db["student_societies"]
 
-    students = collection_name.find({})
-    for s in students:
-        s = s['students']
-        return render(request, 'secy_home_page.html', {"students" : s})
+    clubs = collection_name.find({})
+    for c in clubs:
+        c = c['clubs']
+        return render(request, 'secy_landing_page.html', {"clubs" : c["saasc"]})
