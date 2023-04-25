@@ -176,7 +176,13 @@ except Exception as e:
 #   ]
 
 
-
+# dsa_email
+# {
+#   "emails": [
+#     "aabhaschopra.bt19ele@pec.edu.in",
+#     "annchitbhatnagar.bt19mech@pec.edu.in"
+#   ]
+# }
 
 # head_email
 #
