@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pymongo import MongoClient
 from majorProject.conf import connection_string
 
@@ -17,6 +17,10 @@ def isHead(request):
         
         else:
             return False
+        
+
+def event_details(request, event_id):
+    return render(request, 'event_view.html', {"event_id": event_id})
 
 
 def secy_view(request):

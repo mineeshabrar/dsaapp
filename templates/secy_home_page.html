@@ -46,7 +46,9 @@
           </div> -->
         <div class="col-md-8">
           <div class="container mt-5 me-5 px-3 py-3 pink-box">
-            <form class="row g-3">
+            <form class="row g-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
               <div class="col-md-8">
                 <label for="eventDescription" class="form-label">Event Description</label>
                 <input type="email" class="form-control" id="inputEmail4" placeholder="Describe the event">
@@ -79,11 +81,13 @@
 
                 <div class="form-group">
                   <div class="mb-2">
-                    <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Organisers) </label>
+                    <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Organisers)
+                    </label>
                     <input class="form-control" type="file" id="formFile">
                     <br>
 
-                    <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Participants) </label>
+                    <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Participants)
+                    </label>
                     <input class="form-control" type="file" id="formFile">
                   </div>
                 </div>

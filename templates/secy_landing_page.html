@@ -15,7 +15,7 @@
     <section class="vh-100" style="background-image: url('/static/images/Background.png')">
         <nav class="custom-navbar navbar">
             <div class="container-fluid custom-navbar">
-                <a class="navbar-brand nav-text" href="#">{{clubs}}</a>
+                <a class="navbar-brand nav-text" href="#">{{ clubs }}</a>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ml-auto">
@@ -28,10 +28,10 @@
             <div class="row gx-5">
 
                 {% for event in clubs %}
-                <a href="{{event.id}}">
+                <a href="{{ event.event_id }}">
                     <div class="col-md-4 border p-3 shadow">
-                        <h3>{{event.name}}</h3>
-                        <p>{{event.description}}</p>
+                        <h3>{{ event.name }}</h3>
+                        <p>{{ event.description }}</p>
                     </div>
                 </a>
                 {% endfor %}
