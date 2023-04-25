@@ -18,6 +18,7 @@ from django.urls import path, include, re_path
 from student.views import *
 from authentication.views import *
 from heads.views import *
+from dsa.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +30,8 @@ urlpatterns = [
     path('secy_add_event', add_event),
     path('secy/<str:event_id>', event_details),
     path('secy/saveData/', secy_add_event_data, name= 'saveAddEventData'),
+    path('dsa/', dsa_view),
+    path('dsa_add_event', add_event),
+    path('dsa/<str:event_id>', event_details),
     re_path(r'^.*logout\/$', logout_view)
 ]

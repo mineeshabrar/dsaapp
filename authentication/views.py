@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from majorProject.conf import connection_string
 from heads.views import isHead
+from dsa.views import isDSA
 from pymongo import MongoClient
 
 
@@ -18,6 +19,9 @@ def login_view(request):
         print("user email: " + request.user.email)
         if isHead(request):
             return redirect('secy/')
+        
+        elif isDSA(request):
+            return redirect('/dsa')
         
         else:
             return redirect('student/')
