@@ -24,16 +24,18 @@
                 </ul>
             </div>
         </nav>
-        <div class="container-fluid p-3 mx-4 mr-5 gx-5">
+        <div class="container-fluid p-3 mx-4 gx-5">
             <div class="row gx-5">
 
                 {% for event in clubs %}
-                <a href="{{ event.event_id }}">
-                    <div class="col-md-4 border p-3 shadow">
-                        <h3>{{ event.name }}</h3>
-                        <p>{{ event.description }}</p>
-                    </div>
-                </a>
+                <div class="col-md-3 p-3 shadow  m-5">
+                    <a class="link-dark" style="text-decoration: none; " href="{{ event.event_id }}">
+                        <div class="">
+                            <h3>{{ event.name }}</h3>
+                            <p>{{ event.description }}</p>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
                 <!-- <div class="col-md-4">
             <div class="card m-5">
@@ -53,6 +55,10 @@
             </div>
           </div> -->
             </div>
+        </div>
+        <div class="col-12 text-center mt-2">
+            <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                <a href="secy_home_page.html"></a> Add Events</button>
         </div>
         </div>
     </section>
