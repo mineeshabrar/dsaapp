@@ -23,6 +23,10 @@ def event_details(request, event_id):
     return render(request, 'event_view.html', {"event_id": event_id})
 
 
+def add_event(request):
+    return render(request, 'secy_home_page.html')
+
+
 def secy_view(request):
     collection_name = db["student_societies"]
 
