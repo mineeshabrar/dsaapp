@@ -20,6 +20,6 @@ def student_view_data(request):
                 sid = student['sid']
                 prof = student['prof']
                 # return redirect(f'student/{name}/{sid}/{prof}')
-                return render(request, 'nav_bar_student.html', {"name": name, "sid": sid, "prof": prof,})
+                return render(request, 'student_home_page.html', {"name": name, "sid": sid, "prof": prof,})
             
-    return render(request, 'nav_bar_student.html', {"name": None, "sid": None, "prof": None,})
+    return render(request, 'student_home_page.html', {"name": None, "sid": None, "prof": None,})

@@ -1,1 +1,68 @@
-{% include 'nav_bar_student.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Student Profile</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% load static %}
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <link href="/static/css/home.css" rel="stylesheet" />
+</head>
+
+<body>
+  <section class="vh-100" style="background-image: url('/static/images/Background.png')">
+    <nav class="custom-navbar navbar">
+      <div class="container-fluid custom-navbar">
+        <a class="navbar-brand nav-text" href="#">Student Profile</a>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item ml-auto">
+            <a class="nav-link nav-text" href="logout/">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="col-md-8">
+        <div class="card mt-5">
+          <h5 class="card-header">{{ name }}</h5>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">SID: {{ sid }}</li>
+            <li class="list-group-item">Branch: ECE</li>
+            <li class="list-group-item">Proficiency: {{ prof }}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <br><br><br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 p-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Organized Events</li>
+            {% for event in student.event_organization %}
+            <li class="list-group-item">{{event}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-6 p-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Attended Events</li>
+            {% for event in student.event_participation %}
+            <li class="list-group-item">{{event}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</body>
+
+</html>
