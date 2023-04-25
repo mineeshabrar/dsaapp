@@ -16,10 +16,10 @@ def student_view_data(request):
 
         for student in s:
             if(student['email'] == request.user.email):
-                name = student['name']
-                sid = student['sid']
-                prof = student['prof']
+                # name = student['name']
+                # sid = student['sid']
+                # prof = student['prof']
                 # return redirect(f'student/{name}/{sid}/{prof}')
-                return render(request, 'student_home_page.html', {"name": name, "sid": sid, "prof": prof,})
+                return render(request, 'student_home_page.html', {"student": student})
             
     return render(request, 'student_home_page.html', {"name": None, "sid": None, "prof": None,})
