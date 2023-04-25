@@ -81,9 +81,10 @@ def secy_add_event_data (request):
                     }
 
                     print(new_event)
+
                     c[club].append(new_event)
                     collection_name.update({"_id": ObjectId("643a2f1c3cf4f996659f0737")}, {"clubs": c})
-                    print(c)
+                    
                     break
                     #db.collection_names.updateOne({club_name}, {'$push' : new_event})
         
