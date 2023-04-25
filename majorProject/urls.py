@@ -24,6 +24,6 @@ urlpatterns = [
     path('', login_view),
     path('student/', student_view_data),
     path('accounts/', include("allauth.urls")),
-    path('secy/',secy_view),
+    path('secy/', secy_view),
     re_path(r'^.*logout\/$', logout_view)
 ]
