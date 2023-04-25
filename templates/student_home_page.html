@@ -47,7 +47,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Organized Events</li>
             {% for event in student.event_organization %}
-            <li class="list-group-item">{{event}}</li>
+            <li class="list-group-item">{{ event }}</li>
             {% endfor %}
           </ul>
         </div>
@@ -55,7 +55,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Attended Events</li>
             {% for event in student.event_participation %}
-            <li class="list-group-item">{{event}}</li>
+            <li class="list-group-item">{{ event }}</li>
             {% endfor %}
           </ul>
         </div>
