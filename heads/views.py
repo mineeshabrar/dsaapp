@@ -19,8 +19,7 @@ def isHead(request):
             return False
         
 
-def event_details(request):
-    event_id = "sfsfs"
+def event_details(request, event_id):
     return redirect(request, 'event_view.html', {"event_id": event_id})
 
 
