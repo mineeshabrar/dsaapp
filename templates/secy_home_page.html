@@ -15,7 +15,7 @@
   <section class="vh-100" style="background-image: url('/static/images/Background.png')">
     <nav class="custom-navbar navbar">
       <div class="container-fluid custom-navbar">
-        <a class="navbar-brand nav-text" href="#">Student Profile</a>
+        <a class="navbar-brand nav-text" href="#">Secy Profile</a>
 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item ml-auto">
@@ -26,7 +26,7 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row justify-content-center">
         <!-- <div class="col-md-4">
             <div class="card m-5">
               <div class="card-body">
@@ -60,11 +60,25 @@
                   <option>No</option>
                 </select>
               </div>
+              <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Audience greater than 250 </label>
+                <select id="participantsCheck" class="form-select">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
               <div class="col-md-8">
                 <label for="inputAddress" class="form-label">Sanction Received from College</label>
                 <div class="input-group">
                   <div class="input-group-text">₹</div>
                   <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Amount">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <label for="inputAddress" class="form-label">Sponsorship if Any</label>
+                <div class="input-group">
+                  <div class="input-group-text">₹</div>
+                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Amount / in-kind">
                 </div>
               </div>
               <div class="col-md-4">
