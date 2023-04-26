@@ -8,7 +8,6 @@ class MyAdapter(DefaultSocialAccountAdapter):
         email_domain = sociallogin.user.email.split('@')[1].lower()
         if not email_domain == 'pec.edu.in':
             messages.error(request, "Please login with pec.edu.in")
-            # return render(request, 'login.html')
             raise ImmediateHttpResponse(redirect('/'))
         else:
             pass

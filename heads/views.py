@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from pymongo import MongoClient
 from majorProject.conf import connection_string
 from bson import ObjectId
+import pandas as pd
 
 client = MongoClient(connection_string)
 db = client['dsaapp-db']
@@ -71,6 +72,20 @@ def secy_add_event_data (request):
         sanction = request.POST['CollegeSanction']
         sponsorship = request.POST['Sponsorship']
         college_level = request.POST['College']
+        organisersFile = request.FILES['organisersFile'].read()
+        participantsFile = request.FILES['participantsFile'].read()
+
+        df = pd.read_excel(organisersFile, usecols = [0])
+        organisersList = df['SID'].tolist()
+        organisersList = [str(x) for x in organisersList]
+        print(organisersList)
+
+        df = pd.read_excel(participantsFile, usecols = [0])
+        participantsList = df['SID'].tolist()
+        participantsList = [str(x) for x in participantsList]
+        print(participantsList)
+
+        event_id = ""
 
         collection_name = db["student_societies"]
 
@@ -81,7 +96,6 @@ def secy_add_event_data (request):
 
             for club in c:
                 if(club == club_name):
-                    event_id = ""
                     if(len(c[club]) == 1):
                         event_id = club + str(2301)
                     else:
@@ -98,26 +112,36 @@ def secy_add_event_data (request):
                     new_event = {
                         "name": event_name,
                         "description": event_description,
-                        "event_organization": [
-                         "19105115",
-                        "19105118"
-                         ],
-                         "event_participation": [
-                          "19105123",
-                          "19105113"
-                          ],
+                        "event_organization": organisersList,
+                         "event_participation": participantsList,
                         "event_id": event_id,
                         "sanction": sanction,
                         "sponsorship": sponsorship,
                         "college_level": college_level,
                     }
 
-                    print(new_event)
-
                     c[club].append(new_event)
-                    collection_name.update({"_id": ObjectId("643a2f1c3cf4f996659f0737")}, {"clubs": c})
+                    collection_name.update({"_id": ObjectId("6447c78f53af5f9ad3e24b78")}, {"clubs": c})
 
                     break
                     #db.collection_names.updateOne({club_name}, {'$push' : new_event})
+            
+        collection_name = db["student_students"]
+        
+        students = collection_name.find({})
+
+        for s in students:
+            s = s['students']
+
+            for student in s:
+                print(student)
+                if(organisersList.count(student['sid']) > 0):
+                    student['event_organization'].append(event_id)
+                    #add
+                
+                if(participantsList.count(student['sid']) > 0):
+                    student['event_participation'].append(event_id)
+                    #add
+                    
         
     return redirect('/secy/')
