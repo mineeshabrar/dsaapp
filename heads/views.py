@@ -36,6 +36,8 @@ def event_details(request, event_id):
 def secy_add_event(request):
     return render(request, 'add_event.html')
 
+def view_proficiency(request):
+    return render(request, 'view_proficiency.html')
 
 def secy_view(request):
     collection_name = db["student_societies"]
