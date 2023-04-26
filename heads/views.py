@@ -37,7 +37,27 @@ def secy_add_event(request):
     return render(request, 'add_event.html')
 
 def view_proficiency(request):
-    return render(request, 'view_proficiency.html')
+
+    #
+    prof = "aabhaschopra.bt19ele" 
+    #
+    client = MongoClient(connection_string)
+        
+    db = client['dsaapp-db']
+    collection_name = db["student_student"]
+
+    students = collection_name.find({})
+
+    for s in students:
+            s = s['students']
+
+            for student in s:
+                if(student['prof'] == prof):
+                    return render(request, 'view_proficiency.html', {"student": student})
+
+    return render(request, 'view_proficiency.html', {"student": student})
+    
+    # return render(request, 'view_proficiency.html')
 
 def secy_view(request):
     collection_name = db["student_societies"]

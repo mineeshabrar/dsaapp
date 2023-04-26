@@ -29,6 +29,7 @@ urlpatterns = [
     path('secy/', secy_view),
     path('secy/add_event/', secy_add_event),
     path('secy/view_proficiency/', view_proficiency),
+    # path('secy/view_proficiency/<str:prof>', view_proficiency),
     path('secy/<str:event_id>', event_details),
     path('secy/saveData/', secy_add_event_data, name= 'saveAddEventData'),
     path('dsa/', dsa_view),
