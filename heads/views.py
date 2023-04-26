@@ -78,6 +78,11 @@ def secy_add_event_data(request):
         college_level = request.POST["College"]
         organisersFile = request.FILES["organisersFile"].read()
         participantsFile = request.FILES["participantsFile"].read()
+        event_date_temp = request.POST["EventDate"]
+        # convert date to dd-mm-yyyy
+        event_date_temp = event_date_temp.split("-")
+        event_date = event_date_temp[2] + "-" + event_date_temp[1] + "-" + event_date_temp[0]
+
 
         df = pd.read_excel(organisersFile, usecols=[0])
         organisersList = df["SID"].tolist()
@@ -122,6 +127,7 @@ def secy_add_event_data(request):
                         "sanction": sanction,
                         "sponsorship": sponsorship,
                         "college_level": college_level,
+                        "event_date": event_date
                     }
 
                     c[club].append(new_event)

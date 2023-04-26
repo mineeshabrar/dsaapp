@@ -79,7 +79,8 @@ except Exception as e:
 #           "19105123",
 #           "19105113"
 #         ],
-#         "event_id": "saasc2301"
+#         "event_id": "saasc2301",
+#          "event_date": "20-04-2020"
 #       },
 #       {
 #         "name": "geoquiz",
@@ -92,7 +93,8 @@ except Exception as e:
 #           "19104011",
 #           "19105120"
 #         ],
-#         "event_id": "saasc2302"
+#         "event_id": "saasc2302",
+#         "event_date": "20-04-2020"
 #       },
 #       {
 #         "name": "intrapec",
@@ -105,7 +107,8 @@ except Exception as e:
 #           "19105123",
 #           "19105113"
 #         ],
-#         "event_id": "saasc2303"
+#         "event_id": "saasc2303",
+#         "event_date": "20-04-2020"
 #       },
 #       {
 #         "name": "Cognition",
@@ -118,7 +121,8 @@ except Exception as e:
 #           "19105123",
 #           "19105113"
 #         ],
-#         "event_id": "saasc2304"
+#         "event_id": "saasc2304",
+#         "event_date": "20-04-2020"
 #       }
 #     ],
 #     "music": [
@@ -146,7 +150,8 @@ except Exception as e:
 #           "19105123",
 #           "19105113"
 #         ],
-#         "event_id": "music2302"
+#         "event_id": "music2302",
+#         "event_date": "20-04-2020"
 #       },
 #       {
 #         "name": "chords",
@@ -159,7 +164,8 @@ except Exception as e:
 #           "19105123",
 #           "19105113"
 #         ],
-#         "event_id": "music2303"
+#         "event_id": "music2303",
+#         "event_date": "20-04-2020"
 #       }
 #     ]
 #   }
