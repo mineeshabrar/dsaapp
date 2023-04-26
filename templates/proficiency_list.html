@@ -15,8 +15,7 @@
   <section class="vh-100" style="background-image: url('/static/images/Background.png')">
     <nav class="custom-navbar navbar">
       <div class="container-fluid custom-navbar">
-        <a class="navbar-brand nav-text" href="#">Proficiency Students</a>
-
+        <a class="navbar-brand nav-text" href="#">Proficiency Students List</a>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item ml-auto">
             <a class="nav-link nav-text" href="logout/">Logout</a>
@@ -24,7 +23,15 @@
         </ul>
       </div>
     </nav>
-
+    <div class="container-fluid p-3 mx-4 mr-5 gx-5">
+      <div class="row gx-5">
+        {% for student in students %}
+        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+          <li class="list-group-item">{{ student.name }} {{ student.sid }}</li>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
   </section>
 </body>
 
