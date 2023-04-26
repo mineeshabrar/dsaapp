@@ -21,7 +21,7 @@ def student_final_view_data(request, sid):
                 if(student['sid'] == sid):
                     return render(request, 'student_home_page.html', {"student": student})
 
-    return render(request, 'student_home_page.html', {"student": student})
+    return render(request, 'student_landing_page.html', {"student": student})
 
 
 def student_view_data(request):

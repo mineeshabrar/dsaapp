@@ -121,4 +121,3 @@ def secy_add_event_data (request):
                     #db.collection_names.updateOne({club_name}, {'$push' : new_event})
         
     return redirect('/secy/')
-            
