@@ -27,7 +27,7 @@
 
         <div class="col-12 text-center mt-2">
             <a href="add_event/"><button type="submit" class="btn btn-primary align-self-center pink-button px-3">
-                 Add Events</button></a>
+                    Add Events</button></a>
         </div>
 
         <div class="container-fluid p-3 mx-4 gx-5">
@@ -38,7 +38,9 @@
                         <li class="list-group-item">Student List</li>
                         <!-- send data of all students here -->
                         {% for student in students %}
-                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}"><li class="list-group-item">{{ student.sid }} {{student.name}} {{student.points}}</li></a>
+                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}">
+                            <li class="list-group-item">{{ student.sid }} {{ student.name }} {{ student.points }}</li>
+                        </a>
                         {% endfor %}
                     </ul>
                 </div>

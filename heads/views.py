@@ -21,7 +21,16 @@ def isHead(request):
         
 
 def event_details(request, event_id):
-    return render(request, 'event_view.html', {"event_id": event_id})
+    collection_name = db["student_societies"]
+
+    clubs = collection_name.find({})
+    for c in clubs:
+        c = c['clubs']
+    
+    events = c["aabhaschopra.bt19ele"]
+    for event in events:
+        if event["event_id"] == event_id:
+            return render(request, 'event_view.html', {"event": event})
 
 
 def secy_add_event(request):
@@ -84,7 +93,7 @@ def secy_add_event_data (request):
 
                     c[club].append(new_event)
                     collection_name.update({"_id": ObjectId("643a2f1c3cf4f996659f0737")}, {"clubs": c})
-                    
+
                     break
                     #db.collection_names.updateOne({club_name}, {'$push' : new_event})
         
