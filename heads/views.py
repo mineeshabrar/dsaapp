@@ -46,11 +46,15 @@ def secy_view(request):
         return render(request, 'secy_landing_page.html', {"clubs" : c["aabhaschopra.bt19ele"]})
         # return render(request, 'secy_home_page.html')
 
+
 def secy_add_event_data (request):
     if request.method == 'POST':
         club_name = request.user.email.split('@')[0]
         event_name = request.POST['EventName']
         event_description = request.POST['EventDescription']
+        sanction = request.POST['CollegeSanction']
+        sponsorship = request.POST['Sponsorship']
+        college_level = request.POST['College']
 
         collection_name = db["student_societies"]
 
@@ -87,6 +91,9 @@ def secy_add_event_data (request):
                           "19105113"
                           ],
                         "event_id": event_id,
+                        "sanction": sanction,
+                        "sponsorship": sponsorship,
+                        "college_level": college_level,
                     }
 
                     print(new_event)
