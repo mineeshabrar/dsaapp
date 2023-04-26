@@ -9,6 +9,6 @@ class MyAdapter(DefaultSocialAccountAdapter):
         if not email_domain == 'pec.edu.in':
             messages.error(request, "Please login with pec.edu.in")
             # return render(request, 'login.html')
-            raise ImmediateHttpResponse(redirect(''))
+            raise ImmediateHttpResponse(redirect('/'))
         else:
             pass
