@@ -127,7 +127,7 @@ def secy_add_event_data(request):
                         "sanction": sanction,
                         "sponsorship": sponsorship,
                         "college_level": college_level,
-                        "event_date": event_date
+                        "date": event_date
                     }
 
                     c[club].append(new_event)
