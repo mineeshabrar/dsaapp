@@ -39,7 +39,8 @@ except Exception as e:
 #       "event_participation": [
 #         "ev3"
 #       ],
-#       "points": ""
+#       "points": "9",
+#       "branch": "Ece"
 #     },
 #     {
 #       "sid": "19105123",
@@ -54,7 +55,8 @@ except Exception as e:
 #         "mus3",
 #         "mus4"
 #       ],
-#       "points": ""
+#       "points": "10",
+#       "branch": "EcE"
 #     }
 #   ]
 # }
