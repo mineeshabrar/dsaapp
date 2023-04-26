@@ -15,13 +15,11 @@
 
 <body>
 
-  {% if messages %}
   {% for message in messages %}
   <div class="alert alert-danger mb-0" role="alert">
     {{ message }}
   </div>
   {% endfor %}
-  {% endif %}
 
   <section class="vh-100" style="background-image: url('/static/images/Background.png')">
     <div class="container-fluid text-center h-100">
