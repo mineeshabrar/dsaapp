@@ -7,6 +7,10 @@ import pandas as pd
 client = MongoClient(connection_string)
 db = client['dsaapp-db']
 
+#club_name = request.user.email.split('@')[0]
+club_name = "aabhaschopra.bt19ele"
+
+
 def isHead(request):
     collection_name = db["head_email"]
 
@@ -37,28 +41,19 @@ def event_details(request, event_id):
 def secy_add_event(request):
     return render(request, 'add_event.html')
 
-def view_proficiency(request):
-
-    #
-    prof = "aabhaschopra.bt19ele" 
-    #
-    client = MongoClient(connection_string)
-        
-    db = client['dsaapp-db']
+def proficiency_list(request):
     collection_name = db["student_student"]
-
     students = collection_name.find({})
 
     for s in students:
-            s = s['students']
+        s = s['students']
 
-            for student in s:
-                if(student['prof'] == prof):
-                    return render(request, 'view_proficiency.html', {"student": student})
+        proficiency_list = []
+        for student in s:
+            if (student["prof"] == club_name):
+                proficiency_list.append(student)
 
-    return render(request, 'view_proficiency.html', {"student": student})
-    
-    # return render(request, 'view_proficiency.html')
+        return render(request, 'proficiency_list.html', {"students": proficiency_list})
 
 def secy_view(request):
     collection_name = db["student_societies"]
@@ -72,8 +67,6 @@ def secy_view(request):
 
 def secy_add_event_data (request):
     if request.method == 'POST':
-        #club_name = request.user.email.split('@')[0]
-        club_name = "aabhaschopra.bt19ele"
         event_name = request.POST['EventName']
         event_description = request.POST['EventDescription']
         sanction = request.POST['CollegeSanction']
