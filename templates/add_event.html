@@ -51,22 +51,26 @@
 
               <div class="col-md-8">
                 <label for="eventName" class="form-label">Event Name</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Name of the event" name="EventName">
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Name of the event" name="EventName" required>
+              </div>
+              <div class="col-md-4">
+                <label for="eventName" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="inputEmail4" placeholder="Date of the event" name="EventDate" required>
               </div>
               <div class="col-md-8">
                 <label for="eventDescription" class="form-label">Event Description</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Describe the event" name="EventDescription">
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Describe the event" name="EventDescription" required>
               </div>
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Greater than 250 participants?</label>
-                <select id="participantsCheck" class="form-select" name="ParticipantCount">
+                <select id="participantsCheck" class="form-select" name="ParticipantCount" required>
                   <option selected>Yes</option>
                   <option>No</option>
                 </select>
               </div>
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Audience greater than 250 </label>
-                <select id="participantsCheck" class="form-select">
+                <select id="participantsCheck" class="form-select" required>
                   <option selected>Yes</option>
                   <option>No</option>
                 </select>
@@ -87,7 +91,7 @@
               </div>
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Event Level</label>
-                <select id="participantsCheck" class="form-select" name="College">
+                <select id="participantsCheck" class="form-select" name="College" required>
                   <option selected>PEC</option>
                   <option>NIT</option>
 
@@ -101,12 +105,12 @@
                   <div class="mb-2">
                     <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Organisers)
                     </label>
-                    <input class="form-control" type="file" id="formFile" name="OrgFile">
+                    <input class="form-control" type="file" id="formFile" name="OrgFile" required>
                     <br>
 
                     <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Participants)
                     </label>
-                    <input class="form-control" type="file" id="formFile" name="ParticipationFile">
+                    <input class="form-control" type="file" id="formFile" name="ParticipationFile" required>
                   </div>
                 </div>
               </div>
