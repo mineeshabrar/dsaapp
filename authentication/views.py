@@ -10,7 +10,7 @@ from pymongo import MongoClient
 
 
 client = MongoClient(connection_string)
-db = client['dsaapp-db']
+db = client["dsaapp-db"]
 
 
 def login_view(request):
@@ -18,20 +18,21 @@ def login_view(request):
     if request.user.is_authenticated:
         print("user email: " + request.user.email)
         if isHead(request):
-            return redirect('secy/')
-        
+            return redirect("secy/")
+
         elif isDSA(request):
-            return redirect('/dsa')
-        
+            return redirect("/dsa")
+
         else:
-            return redirect('student/')
-                        
+            return redirect("student/")
+
     else:
         logout(request)
-        return render(request, 'login.html')
+        return render(request, "login.html")
+
 
 @login_required
 def logout_view(request):
     logout(request)
     list(messages.get_messages(request))
-    return redirect('/')
+    return redirect("/")
