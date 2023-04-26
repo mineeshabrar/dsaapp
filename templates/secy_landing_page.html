@@ -18,6 +18,11 @@
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3; 
           }
+          #event_box:hover {
+            -ms-transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1); 
+          }
           
     </style>
     <script>
@@ -60,7 +65,7 @@
             <div class="row gx-5">
 
                 {% for event in clubs %}
-                <div class="col-md-3 p-3 shadow  m-5">
+                <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
                         <div class="">
                             <h3><a class="link-dark" style="text-decoration: none; " href="{{ event.event_id }}">{{ event.name}}</a><button style="border:none;background: none;" onclick="delete_event()"><i class="material-icons">delete</i></button></h3>
                             <div id = "description_css">
