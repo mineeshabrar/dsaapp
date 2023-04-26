@@ -28,7 +28,8 @@
   align-items: flex-start;
   background-size: cover;
   justify-content: center;
-  background-image: url("/static/images/Background.png");
+  /* background-image: url("/static/images/Background.png"); */
+  background-color: #F4E1F9;
   background-position: center;
 }
 .home-image {
