@@ -49,7 +49,8 @@ def secy_view(request):
 
 def secy_add_event_data (request):
     if request.method == 'POST':
-        club_name = request.user.email.split('@')[0]
+        #club_name = request.user.email.split('@')[0]
+        club_name = "aabhaschopra.bt19ele"
         event_name = request.POST['EventName']
         event_description = request.POST['EventDescription']
         sanction = request.POST['CollegeSanction']
