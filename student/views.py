@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from pymongo import MongoClient
+from django.contrib import messages
+from allauth.exceptions import ImmediateHttpResponse
+
 from majorProject.conf import connection_string
+
 
 def student_final_view_data(request, sid):
     client = MongoClient(connection_string)
@@ -33,12 +37,8 @@ def student_view_data(request):
 
             for student in s:
                 if(student['email'] == request.user.email):
-                # name = student['name']
                     sid = student['sid']
-                # prof = student['prof']
-                # return redirect(f'student/{name}/{sid}/{prof}')
-                #return render(request, 'student_home_page.html', {"student": student})
                     return redirect(f'{sid}/')
-            
-        return render(request, 'student_home_page.html', {"name": None, "sid": None, "prof": None,})
-    
+        
+            messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
+            raise ImmediateHttpResponse(redirect('/'))    
