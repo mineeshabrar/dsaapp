@@ -28,21 +28,26 @@
       <div class="row gx-5">
         <p>{{ event.description }}</p>
         <br><br>
-        <h5>Participants</h5>
-        {% for student in event.event_participation %}
-        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
-          <li class="list-group-item">{{ student }}</li>
-        </a>
-        {% endfor %}
-        <br><br>
-        <h5>Organizers</h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 p-3">
+              <h5>Organizers</h5>
         {% for student in event.event_organization %}
         <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
           <li class="list-group-item">{{ student }}</li>
         </a>
         {% endfor %}
-
-        <br><br>
+            </div>
+            <div class="col-md-6 p-3">
+              <h5>Participants</h5>
+        {% for student in event.event_participation %}
+        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+          <li class="list-group-item">{{ student }}</li>
+        </a>
+        {% endfor %}
+            </div>
+          </div>
+        </div>
         <h5>Sanction</h5>
         <p>{{ event.sanction }}</p>
 
