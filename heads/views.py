@@ -10,6 +10,9 @@ db = client["dsaapp-db"]
 # club_name = request.user.email.split('@')[0]
 club_name = "aabhaschopra.bt19ele"
 
+ObjectIdStudents = "643a2e8f3cf4f996659f0734"
+ObjectIdClubs = "643a2f1c3cf4f996659f0737"
+
 
 def isHead(request):
     collection_name = db["head_email"]
@@ -63,10 +66,7 @@ def secy_view(request):
     clubs = collection_name.find({})
     for c in clubs:
         c = c["clubs"]
-        return render(
-            request, "secy_landing_page.html", {"clubs": c["aabhaschopra.bt19ele"]}
-        )
-        # return render(request, 'secy_home_page.html')
+        return render(request, "secy_landing_page.html", {"clubs": c["aabhaschopra.bt19ele"]})
 
 
 def secy_add_event_data(request):
@@ -87,17 +87,16 @@ def secy_add_event_data(request):
         df = pd.read_excel(organisersFile, usecols=[0])
         organisersList = df["SID"].tolist()
         organisersList = [str(x) for x in organisersList]
-        print(organisersList)
+        print("Organisers List: {}".format(organisersList))
 
         df = pd.read_excel(participantsFile, usecols=[0])
         participantsList = df["SID"].tolist()
         participantsList = [str(x) for x in participantsList]
-        print(participantsList)
+        print("Participants List: {}".format(participantsList))
 
         event_id = ""
 
         collection_name = db["student_societies"]
-
         clubs = collection_name.find({})
 
         for c in clubs:
@@ -131,28 +130,25 @@ def secy_add_event_data(request):
                     }
 
                     c[club].append(new_event)
-                    collection_name.update(
-                        {"_id": ObjectId("6447c78f53af5f9ad3e24b78")}, {"clubs": c}
-                    )
+                    collection_name.update({"_id": ObjectId(ObjectIdClubs)}, {"clubs": c})
 
                     break
-                    # db.collection_names.updateOne({club_name}, {'$push' : new_event})
-
-        collection_name = db["student_students"]
-
+            break
+        
+        collection_name = db["student_student"]
         students = collection_name.find({})
 
         for s in students:
+            print(s)
             s = s["students"]
 
             for student in s:
-                print(student)
                 if organisersList.count(student["sid"]) > 0:
                     student["event_organization"].append(event_id)
-                    # add
+                    collection_name.update({"_id": ObjectId(ObjectIdStudents)}, {"students": s})
 
                 if participantsList.count(student["sid"]) > 0:
                     student["event_participation"].append(event_id)
-                    # add
+                    collection_name.update({"_id": ObjectId(ObjectIdStudents)}, {"students": s})
 
     return redirect("/secy/")
