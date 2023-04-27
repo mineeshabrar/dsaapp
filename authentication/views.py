@@ -21,7 +21,7 @@ def login_view(request):
             return redirect("secy/")
 
         elif isDSA(request):
-            return redirect("/dsa")
+            return redirect("dsa/")
 
         else:
             return redirect("student/")

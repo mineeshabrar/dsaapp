@@ -42,11 +42,6 @@ def student_view_data(request):
                 sid = student["sid"]
                 return redirect(f"{sid}/")
 
-        messages.error(
-            request,
-            "{} is not authenticated. Please contact DSA office.".format(
-                request.user.email
-            ),
-        )
+        messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
         logout(request)
         return HttpResponseRedirect("/")
