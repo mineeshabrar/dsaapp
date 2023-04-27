@@ -9,6 +9,8 @@ from majorProject.conf import connection_string
 
 
 def student_final_view_data(request, sid):
+    eventsOrganized = {}
+    eventsParticipated = {}
     client = MongoClient(connection_string)
 
     db = client["dsaapp-db"]
@@ -16,12 +18,25 @@ def student_final_view_data(request, sid):
 
     students = collection_name.find({})
 
-    for s in students:
-        s = s["students"]
+    collection_name = db["student_events"]
+    event = collection_name.find({})
+    
+    for e in event:
+        e = e["events"]
 
-        for student in s:
-            if student["sid"] == sid:
-                return render(request, "student_landing_page.html", {"student": student})
+        for s in students:
+            s = s["students"]
+
+            for student in s:
+                if student["sid"] == sid:
+
+                    for eventsOrg in student["event_organization"]:
+                        eventsOrganized[e[eventsOrg]["date"]] = e[eventsOrg]["name"]
+
+                    for eventsPar in student["event_participation"]:
+                        eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
+                    
+                    return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated" : eventsParticipated})
 
 
 def student_view_data(request):

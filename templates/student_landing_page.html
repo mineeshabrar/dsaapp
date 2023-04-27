@@ -43,7 +43,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">SID: {{ student.sid }}</li>
             <li class="list-group-item">Branch: {{student.branch}}</li>
-            <li class="list-group-item">Proficiency: {{ student.prof }}</li>
+            {% comment %} OPEN HOUSE {% endcomment %}
+            <li class="list-group-item">Proficiency: Music</li>
+            {% comment %} <li class="list-group-item">Proficiency: {{ student.prof }}</li> {% endcomment %}
           </ul>
         </div>
 
@@ -60,9 +62,11 @@
               <th> Event Name </th>
               <th> Event Date</th>
             </tr>
-            {% for event in student.event_participation %}
-              <td>{{ event.name }} </td>
-              <td>{{ event.date }} </td>
+            {% for eventDate, eventName in eventsOrganized.items %}
+              <tr>
+              <td>{{ eventName }} </td>
+              <td>{{ eventDate }} </td>
+              </tr>
             {% endfor %}
           </tr>
           </table>
@@ -73,13 +77,13 @@
             <tr>
               <th> Event Name </th>
               <th> Event Date</th>
-            </tr>
-              <td> ev1 </td>
-              <td>12-4-23</td>
-          </tr>
+            {% for eventDate, eventName in eventsParticipated.items %}
+              <tr>
+              <td>{{ eventName }} </td>
+              <td>{{ eventDate }} </td>
+              </tr>
+            {% endfor %}
         </tr>
-        <td> ev1 </td>
-        <td>12-4-23</td>
     </tr>
           </table>
         </div>

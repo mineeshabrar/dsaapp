@@ -10,8 +10,9 @@ db = client["dsaapp-db"]
 # club_name = request.user.email.split('@')[0]
 club_name = "aabhaschopra.bt19ele"
 
-ObjectIdStudents = "643a2e8f3cf4f996659f0734"
-ObjectIdClubs = "643a2f1c3cf4f996659f0737"
+ObjectIdStudents = "64479e1553af5f9ad3e24b64"
+ObjectIdClubs = "6447c78f53af5f9ad3e24b78"
+ObjectIdEvents = "644a18c1c8f491f343b1c738"
 
 
 def isHead(request):
@@ -96,9 +97,12 @@ def secy_add_event_data(request):
 
         event_id = ""
 
+        collection_name = db["student_events"]
+        events = collection_name.find({})
+
         collection_name = db["student_societies"]
         clubs = collection_name.find({})
-
+        
         for c in clubs:
             c = c["clubs"]
 
@@ -129,17 +133,21 @@ def secy_add_event_data(request):
                         "date": event_date
                     }
 
+                    #Following 3 lines to be commented once 'events' collection is fully synced
                     c[club].append(new_event)
                     collection_name.update({"_id": ObjectId(ObjectIdClubs)}, {"clubs": c})
+                    collection_name = db["student_events"]
 
-                    break
-            break
+                    for e in events:
+                        e = e["events"]
+
+                        e[event_id] = new_event
+                        collection_name.update({"_id": ObjectId(ObjectIdEvents)}, {"events": e})
         
         collection_name = db["student_student"]
         students = collection_name.find({})
 
         for s in students:
-            print(s)
             s = s["students"]
 
             for student in s:
