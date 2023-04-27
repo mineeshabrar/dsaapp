@@ -71,8 +71,8 @@ def secy_view(request):
 
 def secy_add_event_data(request):
     if request.method == "POST":
-        event_name = request.POST["EventName"]
-        event_description = request.POST["EventDescription"]
+        event_name = ((request.POST["EventName"]).title())
+        event_description = ((request.POST["EventDescription"]).capitalize())
         sanction = request.POST["CollegeSanction"]
         sponsorship = request.POST["Sponsorship"]
         college_level = request.POST["College"]
