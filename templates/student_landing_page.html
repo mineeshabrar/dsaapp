@@ -43,7 +43,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">SID: {{ student.sid }}</li>
             <li class="list-group-item">Branch: {{student.branch}}</li>
-            <li class="list-group-item">Proficiency: {{ student.prof }}</li>
+            {% comment %} OPEN HOUSE {% endcomment %}
+            <li class="list-group-item">Proficiency: Music</li>
+            {% comment %} <li class="list-group-item">Proficiency: {{ student.prof }}</li> {% endcomment %}
           </ul>
         </div>
 
