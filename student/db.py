@@ -196,3 +196,21 @@ except Exception as e:
 # head_email
 #
 # {"emails" : ["aabhaschopra.bt19ele@pec.edu.in"]}
+
+# student_events
+# {
+#   "events": {
+#     "music2301": {
+#       "name": "dastak",
+#       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu",
+#       "event_organization": [
+#         "19105115",
+#         "19105118"
+#       ],
+#       "event_participation": [
+#         "19105123",
+#         "19105113"
+#       ]
+#     }
+#   }
+# }

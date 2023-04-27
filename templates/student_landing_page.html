@@ -60,9 +60,11 @@
               <th> Event Name </th>
               <th> Event Date</th>
             </tr>
-            {% for event in student.event_participation %}
-              <td>{{ event.name }} </td>
-              <td>{{ event.date }} </td>
+            {% for eventDate, eventName in eventsOrganized.items %}
+              <tr>
+              <td>{{ eventName }} </td>
+              <td>{{ eventDate }} </td>
+              </tr>
             {% endfor %}
           </tr>
           </table>
@@ -73,13 +75,13 @@
             <tr>
               <th> Event Name </th>
               <th> Event Date</th>
-            </tr>
-              <td> ev1 </td>
-              <td>12-4-23</td>
-          </tr>
+            {% for eventDate, eventName in eventsParticipated.items %}
+              <tr>
+              <td>{{ eventName }} </td>
+              <td>{{ eventDate }} </td>
+              </tr>
+            {% endfor %}
         </tr>
-        <td> ev1 </td>
-        <td>12-4-23</td>
     </tr>
           </table>
         </div>
