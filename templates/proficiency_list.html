@@ -26,7 +26,7 @@
     <div class="container-fluid p-3 mx-4 mr-5 gx-5">
       <div class="row gx-5">
         {% for student in students %}
-        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student.sid }}">
           <li class="list-group-item">{{ student.name }} {{ student.sid }}</li>
         </a>
         {% endfor %}

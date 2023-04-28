@@ -188,3 +188,19 @@
 .nav-text {
   color: white;
 }
+
+body{
+  background: rgb(237,224,254);
+  background: linear-gradient(90deg, rgba(237,224,254,1) 0%, rgba(246,231,238,1) 20%, rgba(234,242,244,1) 100%);
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgb(234,242,244);
+background: linear-gradient(90deg, rgba(234,242,244,1) 0%, rgba(246,231,238,1) 100%, rgba(245,231,239,1) 100%, rgba(237,224,254,1) 100%);
+  color: white;
+  text-align: center;
+}
