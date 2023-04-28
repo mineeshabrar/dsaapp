@@ -10,10 +10,12 @@
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <link href="/static/css/home.css" rel="stylesheet" />
   <style>
-    table, td, th {
+    table,
+    td,
+    th {
       border: 1px solid;
     }
-    
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -57,34 +59,37 @@
       <div class="row">
         <div class="col-md-6 p-3">
           <h5> Organized Events </h5>
-          <table id = "events">
+          <table id="events">
             <tr>
               <th> Event Name </th>
-              <th> Event Date</th>
+              <th> Event Date </th>
             </tr>
             {% for eventDate, eventName in eventsOrganized.items %}
-              <tr>
-              <td>{{ eventName }} </td>
-              <td>{{ eventDate }} </td>
-              </tr>
+              <a href="/secy/{{ event_id }}">
+                <tr>
+                  <td>{{ eventName }} </td>
+                  <td>{{ eventDate }} </td>
+                </tr>
+              </a>
             {% endfor %}
-          </tr>
+            </tr>
           </table>
         </div>
         <div class="col-md-6 p-3">
           <h5> Participated Events </h5>
-          <table id = "events">
+          <table id="events">
             <tr>
               <th> Event Name </th>
-              <th> Event Date</th>
-            {% for eventDate, eventName in eventsParticipated.items %}
-              <tr>
-              <td>{{ eventName }} </td>
-              <td>{{ eventDate }} </td>
-              </tr>
-            {% endfor %}
-        </tr>
-    </tr>
+              <th> Event Date </th>
+              {% for eventDate, eventName in eventsParticipated.items %}
+                <a href="/secy/{{ event_id }}">
+                  <tr>
+                    <td>{{ eventName }} </td>
+                    <td>{{ eventDate }} </td>
+                  </tr>
+                </a>
+              {% endfor %}
+            </tr>
           </table>
         </div>
       </div>

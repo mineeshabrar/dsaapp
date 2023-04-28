@@ -32,7 +32,10 @@ def student_final_view_data(request, sid):
                     for eventsPar in student["event_participation"]:
                         eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
                     
-                    return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated" : eventsParticipated})
+                    print(eventsOrganized)
+                    print(eventsParticipated)
+                    
+                    return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
 
 def student_view_data(request):
