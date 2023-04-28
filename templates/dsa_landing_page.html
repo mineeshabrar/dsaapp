@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <section class="vh-100" style="background-image: url('/static/images/Background.png')">
+    <section class="vh-100">
         <nav class="custom-navbar navbar">
             <div class="container-fluid custom-navbar">
                 <a class="navbar-brand nav-text" href="#">DSA</a>
@@ -31,6 +31,21 @@
                     Add Events
                 </button>
             </a>
+        </div>
+
+        <div class="container-fluid p-3 mx-4 gx-5">
+            <div class="row gx-5">
+                {% for event in clubs %}
+                <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
+                        <div class="">
+                            <h3><a class="link-dark" style="text-decoration: none; " href="{{ event.event_id }}">{{ event.name}}</a><button style="border:none;background: none;" onclick="delete_event()"><i class="material-icons">delete</i></button></h3>
+                            <div id = "description_css">
+                            <p>{{ event.description }}</p>
+                            </div>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="container-fluid p-3 mx-4 gx-5">

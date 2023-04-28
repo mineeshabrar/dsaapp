@@ -12,7 +12,7 @@ def login_view(request):
     if request.user.is_authenticated:
         print("user email: " + request.user.email)
         if isHead(request):
-            return redirect("secy/")
+            return redirect("secy/{}".format(request.user.email.split('@')[0]))
 
         elif isDSA(request):
             return redirect("dsa/")

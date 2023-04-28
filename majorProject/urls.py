@@ -11,7 +11,7 @@ urlpatterns = [
     path('student/', student_view_data),
     path('student/<str:sid>/', student_final_view_data),
     path('accounts/', include("allauth.urls")),
-    path('secy/', secy_view),
+    path('secy/<str:club_name>', secy_view),
     path('secy/add_event/', secy_add_event),
     path('secy/proficiency_list/', proficiency_list),
     path('secy/<str:event_id>', event_details),
