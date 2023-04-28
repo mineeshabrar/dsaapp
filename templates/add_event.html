@@ -12,7 +12,7 @@
   <script>
     // When the user clicks on <div>, open the popup
     function add_event() {
-            confirm("Are you sure you want to add the event?");
+            confirm("Are you sure you want to add the event? You won't be able to change the details later.");
     }
     </script>
 </head>
@@ -33,23 +33,6 @@
 
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <!-- <div class="col-md-4">
-            <div class="card m-5">
-              <div class="card-body">
-                <h5 class="card-title">Events Conducted</h5>
-                <h6 class="card-subtitle mb-2 text-muted">2022-23</h6>
-                <p class="card-text">
-                  <ul>
-                    <li>Raunakan</li>
-                    <li>Chords</li>
-                    <li>Dastak</li>
-                  </ul>
-                </p>
-        
-                <a href="#" class="card-link">Certificates</a>
-              </div>
-            </div>
-          </div> -->
         <div class="col-md-8">
           <div class="container mt-5 me-5 px-3 py-3 pink-box">
             <form class="row g-3" method="post" action="{% url 'saveAddEventData' %}" enctype="multipart/form-data">
@@ -74,13 +57,6 @@
                   <option>No</option>
                 </select>
               </div>
-              <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Audience greater than 250 </label>
-                <select id="participantsCheck" class="form-select" required>
-                  <option selected>Yes</option>
-                  <option>No</option>
-                </select>
-              </div>
               <div class="col-md-8">
                 <label for="inputAddress" class="form-label">Sanction Received from College</label>
                 <div class="input-group">
@@ -100,7 +76,6 @@
                 <select id="participantsCheck" class="form-select" name="College" required>
                   <option selected>PEC</option>
                   <option>NIT</option>
-
                   <option>IIT</option>
                 </select>
               </div>

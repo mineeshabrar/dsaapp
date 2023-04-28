@@ -1,24 +1,20 @@
 from django.shortcuts import render, redirect
-from pymongo import MongoClient
 from django.contrib import messages
 from allauth.exceptions import ImmediateHttpResponse
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
-from majorProject.conf import connection_string
+from majorProject.conf import db
 
 
 def student_final_view_data(request, sid):
     eventsOrganized = {}
     eventsParticipated = {}
-    client = MongoClient(connection_string)
 
-    db = client["dsaapp-db"]
-    collection_name = db["student_student"]
-
+    collection_name = db["students"]
     students = collection_name.find({})
 
-    collection_name = db["student_events"]
+    collection_name = db["events"]
     event = collection_name.find({})
     
     for e in event:
@@ -40,10 +36,7 @@ def student_final_view_data(request, sid):
 
 
 def student_view_data(request):
-    client = MongoClient(connection_string)
-
-    db = client["dsaapp-db"]
-    collection_name = db["student_student"]
+    collection_name = db["students"]
 
     students = collection_name.find({})
 
