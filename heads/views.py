@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from pymongo import MongoClient
 from majorProject.conf import *
 from bson import ObjectId
 import pandas as pd
