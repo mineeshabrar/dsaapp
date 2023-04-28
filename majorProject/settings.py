@@ -91,10 +91,26 @@ DATABASES = {
     },
     'student': {
         'ENGINE': 'djongo',
-        'NAME': 'dsaapp-db',
+        'NAME': 'dsa-app',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://localhost:27017/?retryWrites=true&w=majority'
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
+        }
+    },
+    'heads': {
+        'ENGINE': 'djongo',
+        'NAME': 'dsa-app',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
+        }
+    },
+    'dsa': {
+        'ENGINE': 'djongo',
+        'NAME': 'dsa-app',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
         }
     },
     'authentication': {

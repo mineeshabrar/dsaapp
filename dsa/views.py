@@ -1,9 +1,5 @@
 from django.shortcuts import render, redirect
-from pymongo import MongoClient
-from majorProject.conf import connection_string
-
-client = MongoClient(connection_string)
-db = client["dsaapp-db"]
+from majorProject.conf import db
 
 
 def isDSA(request):
@@ -25,7 +21,7 @@ def dsa_add_event(request):
 
 
 def dsa_view(request):
-    collection_name = db["student_student"]
+    collection_name = db["students"]
 
     students = collection_name.find({})
     for s in students:

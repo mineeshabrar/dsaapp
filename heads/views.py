@@ -1,22 +1,15 @@
 from django.shortcuts import render, redirect
 from pymongo import MongoClient
-from majorProject.conf import connection_string
+from majorProject.conf import *
 from bson import ObjectId
 import pandas as pd
-
-client = MongoClient(connection_string)
-db = client["dsaapp-db"]
 
 # club_name = request.user.email.split('@')[0]
 club_name = "aabhaschopra.bt19ele"
 
-ObjectIdStudents = "64479e1553af5f9ad3e24b64"
-ObjectIdClubs = "6447c78f53af5f9ad3e24b78"
-ObjectIdEvents = "644a18c1c8f491f343b1c738"
-
 
 def isHead(request):
-    collection_name = db["head_email"]
+    collection_name = db["secy_email"]
 
     head_emails = collection_name.find({})
     for h in head_emails:
@@ -30,7 +23,7 @@ def isHead(request):
 
 
 def event_details(request, event_id):
-    collection_name = db["student_societies"]
+    collection_name = db["societies"]
 
     clubs = collection_name.find({})
     for c in clubs:
@@ -47,7 +40,7 @@ def secy_add_event(request):
 
 
 def proficiency_list(request):
-    collection_name = db["student_student"]
+    collection_name = db["students"]
     students = collection_name.find({})
 
     for s in students:
@@ -62,7 +55,7 @@ def proficiency_list(request):
 
 
 def secy_view(request):
-    collection_name = db["student_societies"]
+    collection_name = db["societies"]
 
     clubs = collection_name.find({})
     for c in clubs:
@@ -97,10 +90,10 @@ def secy_add_event_data(request):
 
         event_id = ""
 
-        collection_name = db["student_events"]
+        collection_name = db["events"]
         events = collection_name.find({})
 
-        collection_name = db["student_societies"]
+        collection_name = db["societies"]
         clubs = collection_name.find({})
         
         for c in clubs:
@@ -136,7 +129,7 @@ def secy_add_event_data(request):
                     #Following 3 lines to be commented once 'events' collection is fully synced
                     c[club].append(new_event)
                     collection_name.update({"_id": ObjectId(ObjectIdClubs)}, {"clubs": c})
-                    collection_name = db["student_events"]
+                    collection_name = db["events"]
 
                     for e in events:
                         e = e["events"]
@@ -144,7 +137,7 @@ def secy_add_event_data(request):
                         e[event_id] = new_event
                         collection_name.update({"_id": ObjectId(ObjectIdEvents)}, {"events": e})
         
-        collection_name = db["student_student"]
+        collection_name = db["students"]
         students = collection_name.find({})
 
         for s in students:

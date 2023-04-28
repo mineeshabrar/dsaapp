@@ -3,14 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from majorProject.conf import connection_string
 from heads.views import isHead
 from dsa.views import isDSA
-from pymongo import MongoClient
-
-
-client = MongoClient(connection_string)
-db = client["dsaapp-db"]
 
 
 def login_view(request):

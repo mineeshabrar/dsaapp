@@ -1,13 +1,3 @@
-# from pymongo import MongoClient
-
-# connection_string = "mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority"
-
-# client = MongoClient(connection_string)
-# db = client['E-Curricular']
-# collection_name = db["student_student"]
-
-
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 uri = "mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority"
@@ -17,6 +7,12 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
+    db = client["dsa-app"]
+    collection_name = db["dsa_email"]
+
+    dsa_emails = collection_name.find({})
+    for h in dsa_emails:
+        print(h)
 except Exception as e:
     print(e)
 
