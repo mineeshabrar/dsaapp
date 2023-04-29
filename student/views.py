@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from allauth.exceptions import ImmediateHttpResponse
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
@@ -21,21 +20,18 @@ def student_final_view_data(request, sid):
         e = e["events"]
 
         for s in students:
-            s = s["students"]
+                
+                if s["sid"] == sid:
+                    # for eventsOrg in s["events_organization"]:
+                    #     eventsOrganized[e[eventsOrg]["date"]] = e[eventsOrg]["name"]
 
-            for student in s:
-                if student["sid"] == sid:
-
-                    for eventsOrg in student["event_organization"]:
-                        eventsOrganized[e[eventsOrg]["date"]] = e[eventsOrg]["name"]
-
-                    for eventsPar in student["event_participation"]:
-                        eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
+                    # for eventsPar in s["events_participation"]:
+                    #     eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
                     
-                    print(eventsOrganized)
-                    print(eventsParticipated)
+                    # print(eventsOrganized)
+                    # print(eventsParticipated)
                     
-                    return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
+                    return render(request, "student_landing_page.html", {"student": s, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
 
 def student_view_data(request):
@@ -44,13 +40,10 @@ def student_view_data(request):
     students = collection_name.find({})
 
     for s in students:
-        s = s["students"]
-
-        for student in s:
-            if student["email"] == request.user.email:
-                sid = student["sid"]
+           if s["email"] == request.user.email:
+                sid = s["sid"]
                 return redirect(f"{sid}/")
 
-        messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
-        logout(request)
-        return HttpResponseRedirect("/")
+    messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
+    logout(request)
+    return HttpResponseRedirect("/")
