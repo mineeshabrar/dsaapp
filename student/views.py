@@ -18,19 +18,19 @@ def student_final_view_data(request, sid):
 
     for student in students:    
         if student["sid"] == sid:
-            if len(student["events_organization"]) != 1:
-                events_organized = []
+            eventsOrganized = []
+            eventsParticipated = []
+            if len(student["events_organization"]) > 0:
                 for event in student["events_organization"]:
-                    events_organized.append(get_event_details(event))
+                    eventsOrganized.append(get_event_details(event))
                 
-                eventsOrganized = sorted(events_organized, key=lambda x: x["date"], reverse=True)
+                eventsOrganized = sorted(eventsOrganized, key=lambda x: x["date"], reverse=True)
 
-            if len(student["events_participation"]) != 1:
-                events_participated = []
+            if len(student["events_participation"]) > 0:
                 for event in student["events_participation"]:
-                    events_participated.append(get_event_details(event))
+                    eventsParticipated.append(get_event_details(event))
 
-                eventsParticipated = sorted(events_participated, key=lambda x: x["date"], reverse=True)
+                eventsParticipated = sorted(eventsParticipated, key=lambda x: x["date"], reverse=True)
                 
             return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
