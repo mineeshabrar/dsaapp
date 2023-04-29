@@ -7,7 +7,7 @@ from components.get_event_details import get_event_details
 from components.conf import db
 
 
-def student_final_view_data(request, sid):
+def student_final_view_data(request, sid, role = "student"):
     eventsOrganized = []
     eventsParticipated = []
 
@@ -24,15 +24,15 @@ def student_final_view_data(request, sid):
                 for event in student["events_organization"]:
                     eventsOrganized.append(get_event_details(event))
                 
-                eventsOrganized = sorted(eventsOrganized, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
+                eventsOrganized = sorted(eventsOrganized, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
 
             if len(student["events_participation"]) > 0:
                 for event in student["events_participation"]:
                     eventsParticipated.append(get_event_details(event))
 
-                eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
+                eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
                 
-            return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
+            return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
 
 def student_view_data(request):

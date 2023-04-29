@@ -22,8 +22,10 @@ def dsa_add_event(request):
 
 def dsa_view(request):
     collection_name = db["students"]
+    student = collection_name.find({})
+    students = []
 
-    students = collection_name.find({})
-    for s in students:
-        s = s["students"]
-        return render(request, "dsa_landing_page.html", {"students": s})
+    for s in student:
+        students.append(s)
+    
+    return render(request, "dsa_landing_page.html", {"students": students})
