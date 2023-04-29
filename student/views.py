@@ -7,8 +7,9 @@ from components.conf import db
 
 
 def student_final_view_data(request, sid):
-    eventsOrganized = {}
-    eventsParticipated = {}
+    #to sore event name and event date in the format- [(event1Date, event1Name), (event2Date, event2Name)...]
+    eventsOrganized = []
+    eventsParticipated = []
 
     collection_name = db["students"]
     students = collection_name.find({})
@@ -22,13 +23,14 @@ def student_final_view_data(request, sid):
             if len(s["events_organization"]) != 1:
                 for eventsOrg in s["events_organization"]:
                     event = collection_name.find_one({"event_id": eventsOrg})
-                    eventsOrganized[event["date"]] = event["name"]
-                    
+                    eventsOrganized.append((event["date"] , event["name"]))
+                
+
             if len(s["events_participation"]) != 1:
                 for eventsPar in s["events_participation"]:
                     event = collection_name.find_one({"event_id": eventsPar})
-                    eventsParticipated[event["date"]] = event["name"]
-                    
+                    eventsParticipated.append((event["date"], event["name"]))
+                
             return render(request, "student_landing_page.html", {"student": s, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
 
