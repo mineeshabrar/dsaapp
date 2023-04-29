@@ -62,10 +62,17 @@
         </div>
         <div class="container-fluid p-3 mx-4 gx-5">
             <div class="row gx-5">
-                {% for event in clubs %}
+                {% for event in events %}
                 <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
                         <div class="">
-                            <h3><a class="link-dark" style="text-decoration: none; " href="{{ event.event_id }}">{{ event.name}}</a><button style="border:none;background: none;" onclick="delete_event()"><i class="material-icons">delete</i></button></h3>
+                            <h3>
+                                <a class="link-dark" style="text-decoration: none; " href="{{ club_name }}/{{ event.event_id }}">
+                                    {{ event }}
+                                </a>
+                                <button style="border:none;background: none;" onclick="delete_event()">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </h3>
                             <div id = "description_css">
                             <p>{{ event.description }}</p>
                             </div>
