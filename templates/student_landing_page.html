@@ -45,9 +45,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">SID: {{ student.sid }}</li>
             <li class="list-group-item">Branch: {{student.branch}}</li>
-            {% comment %} OPEN HOUSE {% endcomment %}
-            <li class="list-group-item">Proficiency: Music</li>
-            {% comment %} <li class="list-group-item">Proficiency: {{ student.prof }}</li> {% endcomment %}
+            <li class="list-group-item">Proficiency: {{ student.prof }}</li>
           </ul>
         </div>
 
@@ -67,8 +65,8 @@
             {% for event in eventsOrganized.items %}
               <a href="/secy/{{ event_id }}">
                 <tr>
-                  <td>{{ event.1 }} </td>
                   <td>{{ event.0 }} </td>
+                  <td>{{ event.1 }} </td>
                 </tr>
               </a>
             {% endfor %}
