@@ -20,13 +20,13 @@ def student_final_view_data(request, sid):
         if student["sid"] == sid:
             eventsOrganized = []
             eventsParticipated = []
-            if len(student["events_organization"]) > 1:
+            if len(student["events_organization"]) > 0:
                 for event in student["events_organization"]:
                     eventsOrganized.append(get_event_details(event))
                 
                 eventsOrganized = sorted(eventsOrganized, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
 
-            if len(student["events_participation"]) > 1:
+            if len(student["events_participation"]) > 0:
                 for event in student["events_participation"]:
                     eventsParticipated.append(get_event_details(event))
 
