@@ -1,6 +1,6 @@
 import pandas as pd
 from bson import ObjectId
-from majorProject.conf import *
+from conf import *
 
 
 df = pd.read_excel("C:/Users/Aabhas/Downloads/3rd year prof.xlsx")

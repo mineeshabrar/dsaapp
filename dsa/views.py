@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from majorProject.conf import db
+from components.conf import db
 
 
 def isDSA(request):

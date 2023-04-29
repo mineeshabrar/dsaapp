@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from majorProject.conf import *
+from components.conf import *
 from bson import ObjectId
 import pandas as pd
 

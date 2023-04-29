@@ -4,7 +4,7 @@ from allauth.exceptions import ImmediateHttpResponse
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
-from majorProject.conf import db
+from components.conf import db
 
 
 def student_final_view_data(request, sid):
