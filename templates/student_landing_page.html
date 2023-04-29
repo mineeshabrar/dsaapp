@@ -10,9 +10,11 @@
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <link href="/static/css/home.css?version=1" rel="stylesheet" />
   <style>
-    table,
-    td,
-    th {
+    td a {
+      display: block;
+    }
+
+    td, table, th {
       border: 1px solid;
     }
 
@@ -63,12 +65,10 @@
               <th> Event Date </th>
             </tr>
             {% for event in eventsOrganized %}
-              <a href="/secy/{{ event.event_id }}">
-                <tr>
-                  <td>{{ event.name }} </td>
-                  <td>{{ event.date }} </td>
-                </tr>
-              </a>
+              <tr>
+                <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.name }}</a></td>
+                <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.date }}</a></td>
+              </tr>
             {% endfor %}
             </tr>
           </table>
@@ -80,12 +80,10 @@
               <th> Event Name </th>
               <th> Event Date </th>
               {% for event in eventsParticipated %}
-                <a href="/secy/{{ event.event_id }}">
-                  <tr>
-                    <td>{{ event.name }} </td>
-                    <td>{{ event.date }} </td>
-                  </tr>
-                </a>
+                <tr>
+                  <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.name }}</a></td>
+                  <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.date }}</a></td>
+                </tr>
               {% endfor %}
             </tr>
           </table>
