@@ -3,17 +3,17 @@ from components.conf import *
 from components.get_event_details import get_event_details
 from bson import ObjectId
 import pandas as pd
-import datetime
+from datetime import datetime
 
 
 def isHead(request):
     collection_name = db["secy_email"]
 
     head_emails = collection_name.find({})
-    for h in head_emails:
-        h = h["emails"]
+    for head_email in head_emails:
+        head_email = head_email["emails"]
 
-        if request.user.email in h:
+        if request.user.email in head_email:
             return True
 
         else:
@@ -52,6 +52,8 @@ def secy_view(request, club_name):
             events = []
             for event in club["events"]:
                 events.append(get_event_details(event))
+
+            events = sorted(events, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
             return render(request, "secy_landing_page.html", {"club_name": club_name, "events": events})
 
 

@@ -6,10 +6,10 @@ def isDSA(request):
     collection_name = db["dsa_email"]
 
     dsa_emails = collection_name.find({})
-    for h in dsa_emails:
-        h = h["emails"]
+    for dsa_email in dsa_emails:
+        dsa_email = dsa_email["emails"]
 
-        if request.user.email in h:
+        if request.user.email in dsa_email:
             return True
 
         else:
