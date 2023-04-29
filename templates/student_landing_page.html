@@ -62,11 +62,11 @@
               <th> Event Name </th>
               <th> Event Date </th>
             </tr>
-            {% for event in eventsOrganized.items %}
+            {% for event in eventsOrganized %}
               <a href="/secy/{{ event_id }}">
                 <tr>
-                  <td>{{ event.0 }} </td>
                   <td>{{ event.1 }} </td>
+                  <td>{{ event.0 }} </td>
                 </tr>
               </a>
             {% endfor %}
@@ -79,11 +79,11 @@
             <tr>
               <th> Event Name </th>
               <th> Event Date </th>
-              {% for eventDate, eventName in eventsParticipated.items %}
+              {% for event in eventsParticipated %}
                 <a href="/secy/{{ event_id }}">
                   <tr>
-                    <td>{{ eventName }} </td>
-                    <td>{{ eventDate }} </td>
+                    <td>{{ event.1 }} </td>
+                    <td>{{ event.0 }} </td>
                   </tr>
                 </a>
               {% endfor %}
