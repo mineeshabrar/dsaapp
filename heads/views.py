@@ -101,6 +101,7 @@ def secy_add_event_data(request):
 
                 new_event = {
                     "name": event_name,
+                    "club_name": club_name,
                     "description": event_description,
                     "event_organization": organisersList,
                     "event_participation": participantsList,
