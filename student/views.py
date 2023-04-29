@@ -24,13 +24,13 @@ def student_final_view_data(request, sid):
                 for event in student["events_organization"]:
                     eventsOrganized.append(get_event_details(event))
                 
-                eventsOrganized = sorted(eventsOrganized, key=lambda x: x["date"], reverse=True)
+                eventsOrganized = sorted(eventsOrganized, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
 
             if len(student["events_participation"]) > 0:
                 for event in student["events_participation"]:
                     eventsParticipated.append(get_event_details(event))
 
-                eventsParticipated = sorted(eventsParticipated, key=lambda x: x["date"], reverse=True)
+                eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
                 
             return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
