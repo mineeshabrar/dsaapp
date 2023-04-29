@@ -14,24 +14,22 @@ def student_final_view_data(request, sid):
     students = collection_name.find({})
 
     collection_name = db["events"]
-    event = collection_name.find({})
-    
-    for e in event:
-        e = e["events"]
 
-        for s in students:
+    for s in students:
                 
-                if s["sid"] == sid:
-                    # for eventsOrg in s["events_organization"]:
-                    #     eventsOrganized[e[eventsOrg]["date"]] = e[eventsOrg]["name"]
+        if s["sid"] == sid:
 
-                    # for eventsPar in s["events_participation"]:
-                    #     eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
+            if len(s["events_organization"]) != 1:
+                for eventsOrg in s["events_organization"]:
+                    event = collection_name.find_one({"event_id": eventsOrg})
+                    eventsOrganized[event["date"]] = event["name"]
                     
-                    # print(eventsOrganized)
-                    # print(eventsParticipated)
+            if len(s["events_participation"]) != 1:
+                for eventsPar in s["events_participation"]:
+                    event = collection_name.find_one({"event_id": eventsPar})
+                    eventsParticipated[event["date"]] = event["name"]
                     
-                    return render(request, "student_landing_page.html", {"student": s, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
+            return render(request, "student_landing_page.html", {"student": s, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
 
 def student_view_data(request):
