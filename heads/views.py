@@ -48,7 +48,7 @@ def secy_view(request, club_name):
     clubs = collection_name.find({})
 
     for club in clubs:
-        if club["name"] == club_name:
+        if club["club_name"] == club_name:
             events = []
             for event in club["events"]:
                 events.append(get_event_details(event))
@@ -90,10 +90,10 @@ def secy_add_event_data(request):
         clubs = collection_name.find({})
         
         for club in clubs:
-            if club["name"] == club_name:
+            if club["club_name"] == club_name:
                 year = str(datetime.date.today().year)[-2:]
 
-                if len(club["events"]) <= 1:
+                if len(club["events"]) < 1:
                     event_id = club_name + year + "001"
 
                 else:
@@ -112,12 +112,11 @@ def secy_add_event_data(request):
                     "date": event_date
                 }
 
-                club["events"].append(new_event)
-                print(club["events"])
-                # update
+                club["events"].append(event_id)
+                collection_name.update_one({"club_name": club_name}, {"$set": club})
 
                 collection_name = db["events"]
-                # update
+                collection_name.insert_one(new_event)
         
                 collection_name = db["students"]
                 students = collection_name.find({})
@@ -126,11 +125,12 @@ def secy_add_event_data(request):
                     if student["sid"] in organisersList:
                         student["events_organization"].append(event_id)
                         print(student["events_organization"])
-                        # update
+                        collection_name.update_one({"sid": student["sid"]}, {"$set": student})
+
 
                     if student["sid"] in participantsList:
                         student["events_participation"].append(event_id)
                         print(student["events_participation"])
-                        # update
+                        collection_name.update_one({"sid": student["sid"]}, {"$set": student})
 
     return redirect("/secy/{}".format((club_name)))
