@@ -1,4 +1,4 @@
-from conf import *
+from .conf import *
 
 
 def get_student_details(sid):

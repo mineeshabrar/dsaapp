@@ -44,7 +44,7 @@
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">SID: {{ student.sid }}</li>
-            <li class="list-group-item">Branch: {{student.branch}}</li>
+            <li class="list-group-item">Branch: {{ student.branch }}</li>
             <li class="list-group-item">Proficiency: {{ student.prof }}</li>
           </ul>
         </div>
@@ -63,10 +63,10 @@
               <th> Event Date </th>
             </tr>
             {% for event in eventsOrganized %}
-              <a href="/secy/{{ event_id }}">
+              <a href="/secy/{{ event.event_id }}">
                 <tr>
-                  <td>{{ event.1 }} </td>
-                  <td>{{ event.0 }} </td>
+                  <td>{{ event.name }} </td>
+                  <td>{{ event.date }} </td>
                 </tr>
               </a>
             {% endfor %}
@@ -80,10 +80,10 @@
               <th> Event Name </th>
               <th> Event Date </th>
               {% for event in eventsParticipated %}
-                <a href="/secy/{{ event_id }}">
+                <a href="/secy/{{ event.event_id }}">
                   <tr>
-                    <td>{{ event.1 }} </td>
-                    <td>{{ event.0 }} </td>
+                    <td>{{ event.name }} </td>
+                    <td>{{ event.date }} </td>
                   </tr>
                 </a>
               {% endfor %}

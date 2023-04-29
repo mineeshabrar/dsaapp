@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from components.conf import *
+from components.get_event_details import get_event_details
 from bson import ObjectId
 import pandas as pd
 import datetime
@@ -19,17 +20,9 @@ def isHead(request):
             return False
 
 
-def event_details(request, event_id):
-    collection_name = db["societies"]
-    clubs = collection_name.find({})
-
-    club_name = request.user.email.split('@')[0]
-    for club in clubs:
-        if club["name"] == club_name:
-            events = club["events"]
-            for event in events:
-                if event["event_id"] == event_id:
-                    return render(request, "event_view.html", {"event": event})
+def event_details(request, club_name, event_id):
+    event = get_event_details(event_id)
+    return render(request, "event_view.html", {"event": event})
 
 
 def secy_add_event(request):
@@ -56,11 +49,10 @@ def secy_view(request, club_name):
 
     for club in clubs:
         if club["name"] == club_name:
-            collection_name = db["events"]
-            events = collection_name.find({})
+            events = []
             for event in club["events"]:
-                
-                return render(request, "secy_landing_page.html", {"club_name": club_name, "events": club["events"]})
+                events.append(get_event_details(event))
+            return render(request, "secy_landing_page.html", {"club_name": club_name, "events": events})
 
 
 def secy_add_event_data(request):
