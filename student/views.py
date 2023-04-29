@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from allauth.exceptions import ImmediateHttpResponse
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
@@ -15,27 +14,22 @@ def student_final_view_data(request, sid):
     students = collection_name.find({})
 
     collection_name = db["events"]
-    event = collection_name.find({})
-    
-    for e in event:
-        e = e["events"]
 
-        for s in students:
-            s = s["students"]
+    for s in students:
+                
+        if s["sid"] == sid:
 
-            for student in s:
-                if student["sid"] == sid:
-
-                    for eventsOrg in student["event_organization"]:
-                        eventsOrganized[e[eventsOrg]["date"]] = e[eventsOrg]["name"]
-
-                    for eventsPar in student["event_participation"]:
-                        eventsParticipated[e[eventsPar]["date"]] = e[eventsPar]["name"]
+            if len(s["events_organization"]) != 1:
+                for eventsOrg in s["events_organization"]:
+                    event = collection_name.find_one({"event_id": eventsOrg})
+                    eventsOrganized[event["date"]] = event["name"]
                     
-                    print(eventsOrganized)
-                    print(eventsParticipated)
+            if len(s["events_participation"]) != 1:
+                for eventsPar in s["events_participation"]:
+                    event = collection_name.find_one({"event_id": eventsPar})
+                    eventsParticipated[event["date"]] = event["name"]
                     
-                    return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
+            return render(request, "student_landing_page.html", {"student": s, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
 
 
 def student_view_data(request):
@@ -44,13 +38,10 @@ def student_view_data(request):
     students = collection_name.find({})
 
     for s in students:
-        s = s["students"]
-
-        for student in s:
-            if student["email"] == request.user.email:
-                sid = student["sid"]
+           if s["email"] == request.user.email:
+                sid = s["sid"]
                 return redirect(f"{sid}/")
 
-        messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
-        logout(request)
-        return HttpResponseRedirect("/")
+    messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
+    logout(request)
+    return HttpResponseRedirect("/")
