@@ -28,5 +28,4 @@ def dsa_view(request):
     for s in student:
         students.append(s)
     
-    print(students)
     return render(request, "dsa_landing_page.html", {"students": students})

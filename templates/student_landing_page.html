@@ -22,6 +22,10 @@
       width: 100%;
       border-collapse: collapse;
     }
+
+    .student{
+      display: none;
+    }
   </style>
 </head>
 
@@ -54,7 +58,20 @@
         <div class="col-md-4"></div>
       </div>
     </div>
-    <br><br><br><br><br>
+    <br><br><br>
+    <div class="{{ role }}">
+      <div class="col-md-4">
+        <div class="card mt-5">
+            <h5 class="card-header">Points</h5>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ student.points }}</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <br><br><br>
     <div class="container">
       <div class="row">
         <div class="col-md-6 p-3">

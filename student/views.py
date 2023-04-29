@@ -7,7 +7,7 @@ from components.get_event_details import get_event_details
 from components.conf import db
 
 
-def student_final_view_data(request, sid):
+def student_final_view_data(request, sid, role = "student"):
     eventsOrganized = []
     eventsParticipated = []
 
@@ -32,7 +32,7 @@ def student_final_view_data(request, sid):
 
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
                 
-            return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated})
+            return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
 
 def student_view_data(request):
