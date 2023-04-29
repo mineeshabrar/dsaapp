@@ -15,6 +15,7 @@ urlpatterns = [
     path('secy/add_event/', secy_add_event),
     path('secy/proficiency_list/', proficiency_list),
     path('secy/<str:club_name>/<str:event_id>', event_details),
+    path('secy/<str:club_name>/<str:event_id>/<str:role>/', event_details),
     path('secy/saveData/', secy_add_event_data, name='saveAddEventData'),
     path('dsa/', dsa_view),
     path('dsa/<str:event_id>', event_details),
