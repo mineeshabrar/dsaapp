@@ -30,9 +30,7 @@ def secy_add_event(request):
     return render(request, "add_event.html")
 
 
-def proficiency_list(request):
-    club_name = get_club_name(request.user.email)
-
+def proficiency_list(request, club_name):
     collection_name = db["students"]
     students = collection_name.find({})
 

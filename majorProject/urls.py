@@ -13,7 +13,7 @@ urlpatterns = [
     path('accounts/', include("allauth.urls")),
     path('secy/<str:club_name>', secy_view),
     path('secy/add_event/', secy_add_event),
-    path('secy/proficiency_list/', proficiency_list),
+    path('secy/proficiency_list/<str:club_name>', proficiency_list),
     path('secy/<str:club_name>/<str:event_id>', event_details),
     path('secy/<str:club_name>/<str:event_id>/<str:role>/', event_details),
     path('secy/saveData/', secy_add_event_data, name='saveAddEventData'),
