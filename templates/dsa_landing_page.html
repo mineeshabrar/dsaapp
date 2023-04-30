@@ -32,45 +32,19 @@
                 </button>
             </a>
         </div>
-        <div class="container-fluid p-3 mx-4 gx-5">
-            <h5>View all the Clubs: </h5>
-            <div class="row gx-5">
-                {% for club in clubs %}
-                <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
-                    <div class="">
-                        <h3>
-                            <a class="link-dark" style="text-decoration: none;" href="/secy/{{ club.club_name }}">
-                                {{ club.club_name }}
-                            </a>
-                        </h3>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+        <div class="col-12 text-center mt-2">
+            <a href="view_all_clubs/">
+                <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                    View all the Clubs
+                </button>
+            </a>
         </div>
-
-        <div class="container-fluid p-3 mx-4 gx-5">
-            <div class="row gx-5">
-                <div class="overflow-auto">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>View Students Grouped by Branch, Year</b></li>
-                        {% for year in years %}
-                            <ul>
-                                <a style="text-decoration: none;" class=" link-dark" href="{{ year }}/all">
-                                    Batch of {{ year }}
-                                </a>
-                                {% for branch in branches %}
-                                        <li class="list-group-item">
-                                            <a style="text-decoration: none;" class=" link-dark" href="{{ year }}/{{ branch }}">
-                                                {{ branch }}
-                                            </a>
-                                        </li>
-                                {% endfor %}
-                            </ul>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <div class="col-12 text-center mt-2">
+            <a href="students_grouped/">
+                <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                    View Students List
+                </button>
+            </a>
         </div>
     </section>
 </body>
