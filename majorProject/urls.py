@@ -20,6 +20,7 @@ urlpatterns = [
     path('dsa/', dsa_view),
     path('dsa/<str:event_id>', event_details),
     path('dsa/add_event/', dsa_add_event),
+    path('dsa/<str:year>/<str:branch>', view_student_list),
     path('student/<str:sid>/<str:role>/', student_final_view_data),
     re_path(r'^.*logout\/$', logout_view)
 ]

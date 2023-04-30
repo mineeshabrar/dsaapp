@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Student Profile</title>
+    <title>DSA Dashboard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
@@ -15,7 +15,7 @@
     <section class="vh-100">
         <nav class="custom-navbar navbar">
             <div class="container-fluid custom-navbar">
-                <a class="navbar-brand nav-text" href="#">DSA</a>
+                <a class="navbar-brand nav-text" href="#">DSA Dashboard</a>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ml-auto">
@@ -28,21 +28,22 @@
         <div class="col-12 text-center mt-2">
             <a href="add_event/">
                 <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
-                    Add Events
+                    Click here to add a New Event
                 </button>
             </a>
         </div>
-
         <div class="container-fluid p-3 mx-4 gx-5">
+            <h5>View all the Clubs: </h5>
             <div class="row gx-5">
-                {% for event in clubs %}
+                {% for club in clubs %}
                 <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
-                        <div class="">
-                            <h3><a class="link-dark" style="text-decoration: none; " href="{{ event.event_id }}">{{ event.name}}</a><button style="border:none;background: none;" onclick="delete_event()"><i class="material-icons">delete</i></button></h3>
-                            <div id = "description_css">
-                            <p>{{ event.description }}</p>
-                            </div>
-                        </div>
+                    <div class="">
+                        <h3>
+                            <a class="link-dark" style="text-decoration: none;" href="/secy/{{ club.club_name }}">
+                                {{ club.club_name }}
+                            </a>
+                        </h3>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -52,12 +53,20 @@
             <div class="row gx-5">
                 <div class="overflow-auto">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>Student List</b></li>
-                        <!-- send data of all students here -->
-                        {% for student in students %}
-                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}/admin/">
-                            <li class="list-group-item">{{ student.sid }} {{ student.name }} {{ student.points }}</li>
-                        </a>
+                        <li class="list-group-item"><b>View Students Grouped by Branch, Year</b></li>
+                        {% for year in years %}
+                            <ul>
+                                <a style="text-decoration: none;" class=" link-dark" href="{{ year }}/all">
+                                    Batch of {{ year }}
+                                </a>
+                                {% for branch in branches %}
+                                        <li class="list-group-item">
+                                            <a style="text-decoration: none;" class=" link-dark" href="{{ year }}/{{ branch }}">
+                                                {{ branch }}
+                                            </a>
+                                        </li>
+                                {% endfor %}
+                            </ul>
                         {% endfor %}
                     </ul>
                 </div>
