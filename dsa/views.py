@@ -33,10 +33,14 @@ def view_student_list(request, year, branch):
     return render(request, "view_student_list.html", {"students_grouped": students_grouped, "branch": branch, "year": year})
 
 
-def dsa_view(request):
+def view_all_clubs(request):
     collection_name = db["societies"]
     clubs = collection_name.find({})
 
+    return render(request, "view_all_clubs.html", {"clubs": clubs})
+
+
+def students_grouped(request):
     collection_name = db["students"]
     students = collection_name.find({})
 
@@ -47,4 +51,8 @@ def dsa_view(request):
         years.add(student_year)
         branches.add(student["branch"])
 
-    return render(request, "dsa_landing_page.html", {"clubs": clubs, "years": years, "branches": branches})
+    return render(request, "students_grouped.html", {"years": years, "branches": branches})    
+
+
+def dsa_view(request):
+    return render(request, "dsa_landing_page.html")
