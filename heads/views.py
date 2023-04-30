@@ -4,6 +4,7 @@ from components.get_event_details import get_event_details
 from bson import ObjectId
 import pandas as pd
 from datetime import datetime
+from components.get_club_name import get_club_name
 
 
 def isHead(request):
@@ -30,7 +31,7 @@ def secy_add_event(request):
 
 
 def proficiency_list(request):
-    club_name = request.user.email.split('@')[0]
+    club_name = get_club_name(request.user.email)
 
     collection_name = db["students"]
     students = collection_name.find({})
@@ -82,7 +83,7 @@ def secy_add_event_data(request):
         participantsList = [str(x) for x in participantsList]
         print("Participants List: {}".format(participantsList))
 
-        club_name = request.user.email.split('@')[0]
+        club_name = get_club_name(request.user.email)
         event_id = ""
 
         collection_name = db["events"]
