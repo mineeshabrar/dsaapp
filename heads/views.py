@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from components.conf import *
 from components.get_event_details import get_event_details
-from bson import ObjectId
 import pandas as pd
-from datetime import datetime
+from datetime import date, datetime
 from components.get_club_name import get_club_name
+from django.core.files.storage import default_storage
+from django.conf import settings
+import os
 
 
 def isHead(request):
@@ -63,6 +65,7 @@ def secy_add_event_data(request):
         sanction = request.POST["CollegeSanction"]
         sponsorship = request.POST["Sponsorship"]
         college_level = request.POST["College"]
+        ParticipantCount = request.POST["ParticipantCount"]
         organisersFile = request.FILES["organisersFile"].read()
         participantsFile = request.FILES["participantsFile"].read()
         event_date_temp = request.POST["EventDate"]
@@ -92,7 +95,7 @@ def secy_add_event_data(request):
         
         for club in clubs:
             if club["club_name"] == club_name:
-                year = str(datetime.date.today().year)[-2:]
+                year = str(date.today().year)[-2:]
 
                 if len(club["events"]) < 1:
                     event_id = club_name + year + "001"
@@ -100,12 +103,21 @@ def secy_add_event_data(request):
                 else:
                     event_id = club_name + year + str(len(club["events"]) + 1)
 
+                if "poster" in request.FILES:
+                    poster_file = request.FILES["poster"]
+                    poster_name = event_id + '.' + poster_file.name.split('.')[-1]
+                    poster_path = os.path.join(settings.MEDIA_ROOT, 'static', 'images', 'posters', poster_name)
+                    with open(poster_path, 'wb+') as f:
+                        for chunk in poster_file.chunks():
+                            f.write(chunk)
+
                 new_event = {
                     "name": event_name,
                     "club_name": club_name,
                     "description": event_description,
                     "event_organization": organisersList,
                     "event_participation": participantsList,
+                    "participants_greater_than_250": ParticipantCount,
                     "event_id": event_id,
                     "sanction": sanction,
                     "sponsorship": sponsorship,

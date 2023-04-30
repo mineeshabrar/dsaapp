@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Student Profile</title>
+  <title>Add New Event</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   {% load static %}
@@ -21,7 +21,7 @@
   <section class="vh-100">
     <nav class="custom-navbar navbar">
       <div class="container-fluid custom-navbar">
-        <a class="navbar-brand nav-text" href="#">Add Event</a>
+        <a class="navbar-brand nav-text" href="#">Add New Event</a>
 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item ml-auto">
@@ -92,6 +92,12 @@
                     <label for="formFile" class="form-label" accept=".xls, .xlsx, .csv"> Upload CSV (Participants)
                     </label>
                     <input class="form-control" type="file" id="formFile" name="participantsFile" required>
+                    <br>
+
+                    <label for="formFile" class="form-label" accept=".jpg, .png, .jpeg"> Upload a "Square" Poster for the Event (if available)
+                    </label>
+                    <input class="form-control" type="file" id="formFile" name="poster">
+                    <br>
                   </div>
                 </div>
               </div>
