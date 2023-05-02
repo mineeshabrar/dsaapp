@@ -28,8 +28,8 @@ def event_details(request, club_name, event_id, role = " secy "):
     return render(request, "event_view.html", {"event": event, "role": role})
 
 
-def secy_add_event(request):
-    return render(request, "add_event.html")
+def secy_add_event(request, club_name):
+    return render(request, "add_event.html", {"club_name": club_name})
 
 
 def proficiency_list(request, club_name):
@@ -41,7 +41,7 @@ def proficiency_list(request, club_name):
         if student["prof"] == club_name:
             proficiency_list.append(student)
 
-    return render(request, "proficiency_list.html", {"students": proficiency_list})
+    return render(request, "proficiency_list.html", {"students": proficiency_list,"club_name": club_name})
 
 
 def secy_view(request, club_name):
