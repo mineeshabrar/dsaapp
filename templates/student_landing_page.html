@@ -10,93 +10,105 @@
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <link href="/static/css/home.css?version=1" rel="stylesheet" />
   <style>
-.vertical-nav {
-  min-width: 17rem;
-  width: 17rem;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s;
-}
+    td a {
+      display: block;
+    }
 
-.page-content {
-  width: calc(100% - 17rem);
-  margin-left: 17rem;
-  transition: all 0.4s;
-}
+    td, table, th {
+      border: 1px solid;
+    }
 
-/* for toggle behavior */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-#sidebar.active {
-  margin-left: -17rem;
-}
-
-#content.active {
-  width: 100%;
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  #sidebar {
-    margin-left: -17rem;
-  }
-  #sidebar.active {
-    margin-left: 0;
-  }
-  #content {
-    width: 100%;
-    margin: 0;
-  }
-  #content.active {
-    margin-left: 17rem;
-    width: calc(100% - 17rem);
-  }
-}
-
+    .student{
+      display: none;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Vertical navbar -->
-<div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center"><img src="https://bootstrapious.com/i/snippets/sn-v-nav/avatar.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
-      <div class="media-body">
-        <h4 class="m-0"> {{ student.name }}</h4>
-        <p class="font-weight-light text-muted mb-0"> {{ student.sid }}</p>
+  <section class="vh-100">
+    <nav class="custom-navbar navbar">
+      <div class="container-fluid custom-navbar">
+        <a class="navbar-brand nav-text" href="#">Student Dashboard</a>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item ml-auto">
+            <a class="nav-link nav-text" href="logout/">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="col-md-4">
+        <div class="card mt-5">
+          <h5 class="card-header">{{ student.name }}</h5>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">SID: {{ student.sid }}</li>
+            <li class="list-group-item">Branch: {{ student.branch }}</li>
+            <li class="list-group-item">Proficiency: {{ student.prof }}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-4"></div>
       </div>
     </div>
-  </div>
+    <br><br><br>
+    <div class="{{ role }}">
+      <div class="col-md-4">
+        <div class="card mt-5">
+            <h5 class="card-header">Points</h5>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ student.points }}</li>
+            </ul>
+        </div>
 
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="" class="nav-link text-dark font-italic bg-light">
-                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                Dashboard
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="organized_events/" class="nav-link text-dark font-italic">
-                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Events
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark font-italic">
-                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                Log Out
-            </a>
-    </li>
-  </ul>
-</div>
-<!-- End vertical navbar -->
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 p-3">
+          <h5> Organized Events </h5>
+          <table id="events">
+            <tr>
+              <th> Event Name </th>
+              <th> Event Date </th>
+            </tr>
+            {% for event in eventsOrganized %}
+              <tr>
+                <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}/student/">{{ event.name }}</a></td>
+                <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}/student/">{{ event.date }}</a></td>
+              </tr>
+            {% endfor %}
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-6 p-3">
+          <h5> Participated Events </h5>
+          <table id="events">
+            <tr>
+              <th> Event Name </th>
+              <th> Event Date </th>
+              {% for event in eventsParticipated %}
+                <tr>
+                  <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.name }}</a></td>
+                  <td><a href="/secy/{{ event.club_name }}/{{ event.event_id }}">{{ event.date }}</a></td>
+                </tr>
+              {% endfor %}
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 
-
-<!-- Page content holder -->
-
-
+  </section>
 </body>
 
 </html>
