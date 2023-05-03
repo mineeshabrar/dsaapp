@@ -18,6 +18,7 @@ urlpatterns = [
     path('secy/<str:club_name>/<str:event_id>/<str:role>/', event_details),
     path('secy/saveData/', secy_add_event_data, name='saveAddEventData'),
     path('dsa/', dsa_view),
+    path('dsa/download_excel', download_excel),
     path('dsa/<str:event_id>', event_details),
     path('dsa/add_event/', dsa_add_event),
     path('dsa/<str:year>/<str:branch>', view_student_list),

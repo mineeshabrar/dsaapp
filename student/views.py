@@ -6,7 +6,6 @@ from datetime import datetime
 from components.get_event_details import get_event_details
 from components.conf import db
 
-
 def student_final_view_data(request, sid, role = "student"):
     eventsOrganized = []
     eventsParticipated = []
