@@ -30,7 +30,6 @@ def student_final_view_data(request, sid, role = "student"):
                     eventsParticipated.append(get_event_details(event))
 
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
-                
             return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
 
@@ -72,7 +71,7 @@ def student_organized_events(request, sid,role = "student"):
 
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
                 
-        return render(request, "student_organized_events.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
+            return render(request, "student_organized_events.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
 def student_participated_events(request, sid, role = "student"):
     eventsParticipated = []
@@ -91,4 +90,4 @@ def student_participated_events(request, sid, role = "student"):
 
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
                 
-        return render(request, "student_participated_events.html", {"student": student,"eventsParticipated": eventsParticipated, "role": role})
+            return render(request, "student_participated_events.html", {"student": student,"eventsParticipated": eventsParticipated, "role": role})
