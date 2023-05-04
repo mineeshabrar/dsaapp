@@ -1,6 +1,30 @@
 from django.shortcuts import render, redirect
 from components.conf import db
 from datetime import date
+import pandas as pd
+import xlsxwriter
+from django.http import HttpResponse
+import io
+
+def download_excel(request):
+
+# Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
+    data = db["students"].find({"prof":"ACM-CSS"})
+
+    df = pd.DataFrame(list(data))
+    output = io.BytesIO()
+
+    # Use pandas to write the DataFrame to the BytesIO stream as an Excel file
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Sheet1', index=False)
+    writer.close()
+    output.seek(0)
+
+    # Set the appropriate HTTP response headers
+    response = HttpResponse(output, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="students.xlsx"'
+
+    return response
 
 
 def isDSA(request):
@@ -56,3 +80,4 @@ def students_grouped(request):
 
 def dsa_view(request):
     return render(request, "dsa_landing_page.html")
+
