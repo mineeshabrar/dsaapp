@@ -12,3 +12,4 @@ django-allauth
 pandas
 gunicorn
 xlsxwriter
+WhiteNoise
