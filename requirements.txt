@@ -11,3 +11,4 @@ tzdata==2023.3
 django-allauth
 pandas
 gunicorn
+xlsxwriter
