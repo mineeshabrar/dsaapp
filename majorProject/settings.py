@@ -38,11 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_createsuperuser',
     'authentication',
     'heads',
     'student',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
