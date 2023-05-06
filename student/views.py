@@ -19,6 +19,9 @@ def isStudent(request):
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_final_view_data(request, sid):
+    if(request.session["role"]=='student' and request.session["studentID"]!=sid):
+        SID=request.session["studentID"]
+        return redirect(f"{SID}/")
     eventsOrganized = []
     eventsParticipated = []
 
@@ -59,12 +62,15 @@ def student_final_view_data(request, sid):
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)   
 def student_view_data(request):
+    
     collection_name = db["students"]
     students = collection_name.find({})
 
     for student in students:
         if student["email"] == request.user.email:
             sid = student["sid"]
+            if(request.session["role"]=='student'):
+                request.session["studentID"]=sid
             return redirect(f"{sid}/")
 
     messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
