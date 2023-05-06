@@ -5,7 +5,11 @@ from django.http import HttpResponseRedirect
 from datetime import datetime
 from components.get_event_details import get_event_details
 from components.conf import db
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_final_view_data(request, sid, role = "student"):
     eventsOrganized = []
     eventsParticipated = []
@@ -32,7 +36,8 @@ def student_final_view_data(request, sid, role = "student"):
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
             return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_view_data(request):
     collection_name = db["students"]
     students = collection_name.find({})
@@ -45,7 +50,8 @@ def student_view_data(request):
     messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
     logout(request)
     return HttpResponseRedirect("/")
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_organized_events(request, sid,role = "student"):
     eventsOrganized = []
     eventsParticipated = []
@@ -73,6 +79,8 @@ def student_organized_events(request, sid,role = "student"):
                 
             return render(request, "student_organized_events.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
 
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_participated_events(request, sid, role = "student"):
     eventsParticipated = []
 

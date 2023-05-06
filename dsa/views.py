@@ -5,7 +5,11 @@ import pandas as pd
 import xlsxwriter
 from django.http import HttpResponse
 import io
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
+from django.core.cache import cache
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def download_excel(request):
 
 # Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
@@ -40,11 +44,13 @@ def isDSA(request):
         else:
             return False
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def dsa_add_event(request):
     return render(request, "add_event.html")
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def view_student_list(request, year, branch):
     collection_name = db["students"]
     students = collection_name.find({})
@@ -56,14 +62,15 @@ def view_student_list(request, year, branch):
     
     return render(request, "view_student_list.html", {"students_grouped": students_grouped, "branch": branch, "year": year})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def view_all_clubs(request):
     collection_name = db["societies"]
     clubs = collection_name.find({})
 
     return render(request, "view_all_clubs.html", {"clubs": clubs})
-
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def students_grouped(request):
     collection_name = db["students"]
     students = collection_name.find({})
@@ -77,7 +84,9 @@ def students_grouped(request):
 
     return render(request, "students_grouped.html", {"years": years, "branches": branches})    
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def dsa_view(request):
+    print(dict(request.session))
     return render(request, "dsa_landing_page.html")
-
+    

@@ -7,7 +7,8 @@ from components.get_club_name import get_club_name
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 
 def isHead(request):
     collection_name = db["secy_email"]
@@ -22,16 +23,19 @@ def isHead(request):
         else:
             return False
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def event_details(request, event_id, role = " secy "):
     event = get_event_details(event_id)
     return render(request, "event_view.html", {"event": event, "role": role})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event(request, club_name):
     return render(request, "add_event.html", {"club_name": club_name})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def proficiency_list(request, club_name):
     collection_name = db["students"]
     students = collection_name.find({})
@@ -43,7 +47,8 @@ def proficiency_list(request, club_name):
 
     return render(request, "proficiency_list.html", {"students": proficiency_list,"club_name": club_name})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_view(request, club_name):
     collection_name = db["societies"]
     clubs = collection_name.find({})
@@ -57,7 +62,8 @@ def secy_view(request, club_name):
             events = sorted(events, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
             return render(request, "secy_landing_page.html", {"club_name": club_name, "events": events})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event_data(request):
     if request.method == "POST":
         event_name = ((request.POST["EventName"]).title())

@@ -3,9 +3,11 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from components.get_club_name import get_club_name
-
+from django.core.cache import cache
 from heads.views import isHead
 from dsa.views import isDSA
+from django.views.decorators.cache import cache_control
+
 
 
 def login_view(request):
@@ -17,6 +19,7 @@ def login_view(request):
             return redirect(f"secy/{club_name}")
 
         elif isDSA(request):
+            request.session["role"]="DSA"
             return redirect("dsa/")
 
         else:
@@ -27,8 +30,9 @@ def login_view(request):
         return render(request, "login.html")
 
 
-@login_required
+@login_required(login_url='/')
 def logout_view(request):
     logout(request)
+ 
     list(messages.get_messages(request))
     return redirect("/")
