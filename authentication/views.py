@@ -24,7 +24,7 @@ def login_view(request):
 
     else:
         logout(request)
-        return render(request, "login.html")
+        return render(request, "login_page.html")
 
 
 @login_required
