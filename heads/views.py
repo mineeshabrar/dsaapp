@@ -19,14 +19,12 @@ def isHead(request):
         if request.user.email in head_email:
             return True
 
-        else:
-            return False
+        return False
 
 
-def event_details(request, event_id, club_name, role = " secy "):
-    print("Hi")
+def event_details(request, event_id, club_name):
     event = get_event_details(event_id)
-    return render(request, "event_view.html", {"event": event, "role": role})
+    return render(request, "event_view.html", {"event": event, "isHead": isHead()})
 
 
 def secy_add_event(request, club_name):

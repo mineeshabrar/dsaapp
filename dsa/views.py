@@ -37,8 +37,7 @@ def isDSA(request):
         if request.user.email in dsa_email:
             return True
 
-        else:
-            return False
+        return False
 
 
 def dsa_add_event(request):
