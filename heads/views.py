@@ -101,7 +101,7 @@ def secy_add_event_data(request):
                     event_id = club_name + year + "001"
 
                 else:
-                    event_id = club_name + year + str(len(club["events"]) + 1)
+                    event_id = club_name + year + str(len(club["events"]) + 1).zfill(3)
 
                 if "poster" in request.FILES:
                     poster_file = request.FILES["poster"]
