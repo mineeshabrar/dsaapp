@@ -7,7 +7,6 @@ from django.http import HttpResponse
 import io
 
 def download_excel(request):
-
 # Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
     data = db["students"].find({"prof":"ACM-CSS"})
 
