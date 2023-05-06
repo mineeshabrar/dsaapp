@@ -175,9 +175,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-#787781755043-a0biko81tatu6rj4ur8g4q8lcvkmffvr.apps.googleusercontent.com
-#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
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -186,6 +183,10 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
+        },
+        'APP': {
+            'client_id': "787781755043-a0biko81tatu6rj4ur8g4q8lcvkmffvr.apps.googleusercontent.com",
+            'secret': "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",
         },
     }
 }
