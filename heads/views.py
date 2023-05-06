@@ -22,9 +22,9 @@ def isHead(request):
         return False
 
 
-def event_details(request, event_id, club_name):
+def event_details(request, event_id, club_name=""):
     event = get_event_details(event_id)
-    return render(request, "event_view.html", {"event": event, "isHead": isHead()})
+    return render(request, "event_view.html", {"event": event, "isHead": isHead(request)})
 
 
 def secy_add_event(request, club_name):
