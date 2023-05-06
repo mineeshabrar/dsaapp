@@ -23,7 +23,8 @@ def isHead(request):
             return False
 
 
-def event_details(request, event_id, role = " secy "):
+def event_details(request, event_id, club_name, role = " secy "):
+    print("Hi")
     event = get_event_details(event_id)
     return render(request, "event_view.html", {"event": event, "role": role})
 
