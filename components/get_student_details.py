@@ -7,5 +7,4 @@ def get_student_details(sid):
 
     for student in students:
         if student["sid"] == sid:
-            print(student)
             return student

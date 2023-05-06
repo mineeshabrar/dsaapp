@@ -19,17 +19,16 @@ def isHead(request):
         if request.user.email in head_email:
             return True
 
-        else:
-            return False
+        return False
 
 
-def event_details(request, club_name, event_id, role = " secy "):
+def event_details(request, event_id, club_name):
     event = get_event_details(event_id)
-    return render(request, "event_view.html", {"event": event, "role": role})
+    return render(request, "event_view.html", {"event": event, "isHead": isHead()})
 
 
-def secy_add_event(request):
-    return render(request, "add_event.html")
+def secy_add_event(request, club_name):
+    return render(request, "add_event.html", {"club_name": club_name})
 
 
 def proficiency_list(request, club_name):
@@ -41,7 +40,7 @@ def proficiency_list(request, club_name):
         if student["prof"] == club_name:
             proficiency_list.append(student)
 
-    return render(request, "proficiency_list.html", {"students": proficiency_list})
+    return render(request, "proficiency_list.html", {"students": proficiency_list,"club_name": club_name})
 
 
 def secy_view(request, club_name):
@@ -101,7 +100,7 @@ def secy_add_event_data(request):
                     event_id = club_name + year + "001"
 
                 else:
-                    event_id = club_name + year + str(len(club["events"]) + 1)
+                    event_id = club_name + year + str(len(club["events"]) + 1).zfill(3)
 
                 if "poster" in request.FILES:
                     poster_file = request.FILES["poster"]

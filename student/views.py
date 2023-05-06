@@ -5,9 +5,18 @@ from django.http import HttpResponseRedirect
 from datetime import datetime
 from components.get_event_details import get_event_details
 from components.conf import db
+from heads.views import isHead
+from dsa.views import isDSA
 
 
-def student_final_view_data(request, sid, role = "student"):
+def isStudent(request):
+    if not isDSA(request) and not isHead(request):
+        return True
+    
+    return False
+
+
+def student_final_view_data(request, sid):
     eventsOrganized = []
     eventsParticipated = []
 
@@ -31,8 +40,19 @@ def student_final_view_data(request, sid, role = "student"):
                     eventsParticipated.append(get_event_details(event))
 
                 eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
-                
-            return render(request, "student_landing_page.html", {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "role": role})
+            
+            endpoint = request.get_full_path().rsplit("/", 1)[0]
+            print("endpoint: {}".format(endpoint))
+            if endpoint == "/student/{}/organized_events".format(sid):
+                html = "student_organized_events.html"
+
+            elif endpoint == "/student/{}/participated_events".format(sid):
+                html = "student_participated_events.html"
+            
+            else:
+                html = "student_landing_page.html"
+            
+            return render(request, html, {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "isStudent": isStudent(request)})
 
 
 def student_view_data(request):
