@@ -24,9 +24,9 @@ def isHead(request):
 
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
-def event_details(request, event_id, role = " secy "):
+def event_details(request, event_id):
     event = get_event_details(event_id)
-    return render(request, "event_view.html", {"event": event, "isHead": isHead()})
+    return render(request, "event_view.html", {"event": event, "isHead": isHead(request)})
 
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
