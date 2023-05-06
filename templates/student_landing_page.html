@@ -85,7 +85,7 @@
   </div>
 </div>
 <br><br><br>
-<div class="{{ role }}">
+{% if not isStudent %}
   <div class="col-md-4">
     <div class="card mt-5">
         <h5 class="card-header">Points</h5>
@@ -93,7 +93,7 @@
         <li class="list-group-item">{{ student.points }}</li>
         </ul>
     </div>
-
+{% endif %}
   </div>
 </body>
 

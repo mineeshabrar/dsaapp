@@ -41,8 +41,7 @@ def isDSA(request):
         if request.user.email in dsa_email:
             return True
 
-        else:
-            return False
+        return False
 
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)

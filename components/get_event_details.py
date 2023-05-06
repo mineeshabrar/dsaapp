@@ -6,5 +6,4 @@ def get_event_details(event_id):
 
     for event in events:
         if event["event_id"] == event_id:
-            print(event)
             return event
