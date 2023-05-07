@@ -50,7 +50,7 @@ def isDSA(request):
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def dsa_add_event(request):
     if(request.session["role"]=='dsa'):
-        return render(request, "add_event.html")
+        return render(request, "add_event.html",{"role":"dsa"})
     else:
         return redirect("/")
 
@@ -102,7 +102,7 @@ def students_grouped(request):
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def dsa_view(request):
     print(dict(request.session))
-    if(request.session["role"]=='dsa'):
+    if(dict(request.session)["role"]=='dsa'):
         return render(request, "dsa_landing_page.html")
     else:
         return redirect("/")

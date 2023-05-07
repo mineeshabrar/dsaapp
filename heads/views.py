@@ -25,17 +25,23 @@ def isHead(request):
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def event_details(request, event_id):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     event = get_event_details(event_id)
     return render(request, "event_view.html", {"event": event, "isHead": isHead(request)})
 
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event(request, club_name):
-    return render(request, "add_event.html", {"club_name": club_name})
+    if(request.session["role"]=='student'):
+        return redirect('/')
+    return render(request, "add_event.html", {"club_name": club_name,"role":'secy'})
 
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def proficiency_list(request, club_name):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     collection_name = db["students"]
     students = collection_name.find({})
 
@@ -49,6 +55,8 @@ def proficiency_list(request, club_name):
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_view(request, club_name):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     collection_name = db["societies"]
     clubs = collection_name.find({})
 
@@ -64,6 +72,8 @@ def secy_view(request, club_name):
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event_data(request):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     if request.method == "POST":
         event_name = ((request.POST["EventName"]).title())
         event_description = ((request.POST["EventDescription"]).capitalize())
