@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from datetime import datetime
 from components.get_event_details import get_event_details
 from components.conf import db
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from heads.views import isHead
 from dsa.views import isDSA
 
@@ -12,11 +14,14 @@ from dsa.views import isDSA
 def isStudent(request):
     if not isDSA(request) and not isHead(request):
         return True
-    
     return False
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_final_view_data(request, sid):
+    if(request.session["role"]=='student' and request.session["studentID"]!=sid):
+        SID=request.session["studentID"]
+        return redirect("/")
     eventsOrganized = []
     eventsParticipated = []
 
@@ -54,14 +59,18 @@ def student_final_view_data(request, sid):
             
             return render(request, html, {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "isStudent": isStudent(request)})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)   
 def student_view_data(request):
+    
     collection_name = db["students"]
     students = collection_name.find({})
 
     for student in students:
         if student["email"] == request.user.email:
             sid = student["sid"]
+            if(request.session["role"]=='student'):
+                request.session["studentID"]=sid
             return redirect(f"{sid}/")
 
     messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))

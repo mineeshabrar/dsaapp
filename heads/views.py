@@ -7,7 +7,11 @@ from components.get_club_name import get_club_name
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
-
+import xlsxwriter
+from django.http import HttpResponse
+import io
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 
 def isHead(request):
     collection_name = db["secy_email"]
@@ -20,18 +24,51 @@ def isHead(request):
             return True
 
         return False
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
+def download_prof(request):
+    if(request.session["role"][:4]=='secy'):
 
+# Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
+        club_name=list(request.session["role"].split())[1]
+        data = db["students"].find({"prof":club_name})
 
-def event_details(request, event_id, club_name):
+        df = pd.DataFrame(list(data))
+        output = io.BytesIO()
+
+        # Use pandas to write the DataFrame to the BytesIO stream as an Excel file
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer, sheet_name='Sheet1', index=False)
+        writer.close()
+        output.seek(0)
+
+        # Set the appropriate HTTP response headers
+        response = HttpResponse(output, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="students.xlsx"'
+
+        return response
+    else:
+        return redirect("/")
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
+def event_details(request, event_id, club_name=""):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     event = get_event_details(event_id)
-    return render(request, "event_view.html", {"event": event, "isHead": isHead()})
+    return render(request, "event_view.html", {"event": event, "isHead": isHead(request)})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event(request, club_name):
-    return render(request, "add_event.html", {"club_name": club_name})
+    if(request.session["role"]=='student'):
+        return redirect('/')
+    return render(request, "add_event.html", {"club_name": club_name,"role":'secy'})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def proficiency_list(request, club_name):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     collection_name = db["students"]
     students = collection_name.find({})
 
@@ -42,8 +79,11 @@ def proficiency_list(request, club_name):
 
     return render(request, "proficiency_list.html", {"students": proficiency_list,"club_name": club_name})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_view(request, club_name):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     collection_name = db["societies"]
     clubs = collection_name.find({})
 
@@ -56,8 +96,11 @@ def secy_view(request, club_name):
             events = sorted(events, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'), reverse=True)
             return render(request, "secy_landing_page.html", {"club_name": club_name, "events": events})
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def secy_add_event_data(request):
+    if(request.session["role"]=='student'):
+        return redirect('/')
     if request.method == "POST":
         event_name = ((request.POST["EventName"]).title())
         event_description = ((request.POST["EventDescription"]).capitalize())
