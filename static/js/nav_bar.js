@@ -50,7 +50,7 @@ $('.sidebar .categories').addEventListener('click', function (event) {
 
   const item = event.target.closest('.has-dropdown')
 
-  if (!item) {
+  if (! item) {
     return
   }
 
@@ -224,22 +224,22 @@ var myChart = new Chart(chart, {
       data: [6, 20, 5, 20, 5, 25, 9, 18, 20, 15],
       backgroundColor: 'transparent'
     },
-    {
-      label: "Lost",
-      lineTension: 0.2,
-      borderColor: '#f0ad4e',
-      borderWidth: 1.5,
-      data: [12, 20, 15, 20, 5, 35, 10, 15, 35, 25],
-      backgroundColor: 'transparent'
-    },
-    {
-      label: "Lost",
-      lineTension: 0.2,
-      borderColor: '#337ab7',
-      borderWidth: 1.5,
-      data: [16, 25, 10, 25, 10, 30, 14, 23, 14, 29],
-      backgroundColor: 'transparent'
-    }]
+               {
+                 label: "Lost",
+                 lineTension: 0.2,
+                 borderColor: '#f0ad4e',
+                 borderWidth: 1.5,
+                 data: [12, 20, 15, 20, 5, 35, 10, 15, 35, 25],
+                 backgroundColor: 'transparent'
+               },
+               {
+                 label: "Lost",
+                 lineTension: 0.2,
+                 borderColor: '#337ab7',
+                 borderWidth: 1.5,
+                 data: [16, 25, 10, 25, 10, 30, 14, 23, 14, 29],
+                 backgroundColor: 'transparent'
+               }]
   },
   options: {
     scales: {

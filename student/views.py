@@ -16,12 +16,11 @@ def isStudent(request):
         return True
     return False
 
-
-@login_required(login_url="/")
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def student_final_view_data(request, sid):
-    if request.session["role"] == "student" and request.session["studentID"] != sid:
-        SID = request.session["studentID"]
+    if(request.session["role"]=='student' and request.session["studentID"]!=sid):
+        SID=request.session["studentID"]
         return redirect("/")
     eventsOrganized = []
     eventsParticipated = []
@@ -31,28 +30,22 @@ def student_final_view_data(request, sid):
 
     collection_name = db["events"]
 
-    for student in students:
+    for student in students:    
         if student["sid"] == sid:
             eventsOrganized = []
             eventsParticipated = []
             if len(student["events_organization"]) > 0:
                 for event in student["events_organization"]:
                     eventsOrganized.append(get_event_details(event))
-
-                eventsOrganized = sorted(
-                    eventsOrganized,
-                    key=lambda x: datetime.strptime(x["date"], "%d-%m-%Y"),
-                )
+                
+                eventsOrganized = sorted(eventsOrganized, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
 
             if len(student["events_participation"]) > 0:
                 for event in student["events_participation"]:
                     eventsParticipated.append(get_event_details(event))
 
-                eventsParticipated = sorted(
-                    eventsParticipated,
-                    key=lambda x: datetime.strptime(x["date"], "%d-%m-%Y"),
-                )
-
+                eventsParticipated = sorted(eventsParticipated, key=lambda x: datetime.strptime(x["date"], '%d-%m-%Y'))
+            
             endpoint = request.get_full_path().rsplit("/", 1)[0]
             print("endpoint: {}".format(endpoint))
             if endpoint == "/student/{}/organized_events".format(sid):
@@ -60,40 +53,26 @@ def student_final_view_data(request, sid):
 
             elif endpoint == "/student/{}/participated_events".format(sid):
                 html = "student_participated_events.html"
-
+            
             else:
                 html = "student_landing_page.html"
+            
+            return render(request, html, {"student": student, "eventsOrganized": eventsOrganized, "eventsParticipated": eventsParticipated, "isStudent": isStudent(request)})
 
-            return render(
-                request,
-                html,
-                {
-                    "student": student,
-                    "eventsOrganized": eventsOrganized,
-                    "eventsParticipated": eventsParticipated,
-                    "isStudent": isStudent(request),
-                },
-            )
-
-
-@login_required(login_url="/")
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)   
 def student_view_data(request):
+    
     collection_name = db["students"]
     students = collection_name.find({})
 
     for student in students:
         if student["email"] == request.user.email:
             sid = student["sid"]
-            if request.session["role"] == "student":
-                request.session["studentID"] = sid
+            if(request.session["role"]=='student'):
+                request.session["studentID"]=sid
             return redirect(f"{sid}/")
 
-    messages.error(
-        request,
-        "{} is not authenticated. Please contact DSA office.".format(
-            request.user.email
-        ),
-    )
+    messages.error(request, "{} is not authenticated. Please contact DSA office.".format(request.user.email))
     logout(request)
     return HttpResponseRedirect("/")
