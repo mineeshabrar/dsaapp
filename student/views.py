@@ -21,7 +21,7 @@ def isStudent(request):
 def student_final_view_data(request, sid):
     if(request.session["role"]=='student' and request.session["studentID"]!=sid):
         SID=request.session["studentID"]
-        return redirect(f"{SID}/")
+        return redirect("/")
     eventsOrganized = []
     eventsParticipated = []
 

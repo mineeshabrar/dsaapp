@@ -29,7 +29,7 @@
                 <div class="overflow-auto">
                     <ul class="list-group list-group-flush">
                         {% for student in students_grouped %}
-                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}/admin/">
+                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}/">
                             <li class="list-group-item">{{ student.sid }} {{ student.name }} {{ student.points }}</li>
                         </a>
                         {% endfor %}

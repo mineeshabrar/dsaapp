@@ -7,6 +7,9 @@ from components.get_club_name import get_club_name
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
+import xlsxwriter
+from django.http import HttpResponse
+import io
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 
@@ -21,7 +24,31 @@ def isHead(request):
             return True
 
         return False
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
+def download_prof(request):
+    if(request.session["role"][:4]=='secy'):
 
+# Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
+        club_name=list(request.session["role"].split())[1]
+        data = db["students"].find({"prof":club_name})
+
+        df = pd.DataFrame(list(data))
+        output = io.BytesIO()
+
+        # Use pandas to write the DataFrame to the BytesIO stream as an Excel file
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer, sheet_name='Sheet1', index=False)
+        writer.close()
+        output.seek(0)
+
+        # Set the appropriate HTTP response headers
+        response = HttpResponse(output, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="students.xlsx"'
+
+        return response
+    else:
+        return redirect("/")
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def event_details(request, event_id):

@@ -10,11 +10,11 @@ from django.views.decorators.cache import cache_control
 from django.core.cache import cache
 @login_required(login_url='/')
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)
-def download_excel(request):
+def download_excel(request,club_name):
     if(request.session["role"]=='dsa'):
 
 # Currently all this does is, find the details of all ACM-CSS students (Hard-coded) and downloads the excel file.
-        data = db["students"].find({"prof":"ACM-CSS"})
+        data = db["students"].find({"prof":club_name})
 
         df = pd.DataFrame(list(data))
         output = io.BytesIO()
