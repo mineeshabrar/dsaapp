@@ -30,19 +30,18 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><b>View Students Grouped by Branch, Year</b></li>
                         {% for year in years %}
-                        <ul>
-                            <a style="text-decoration: none;" class=" link-dark" href="/dsa/{{ year }}/all">
-                                Batch of {{ year }}
-                            </a>
-                            {% for branch in branches %}
-                            <li class="list-group-item">
-                                <a style="text-decoration: none;" class=" link-dark"
-                                    href="/dsa/{{ year }}/{{ branch }}">
-                                    {{ branch }}
+                            <ul>
+                                <a style="text-decoration: none;" class=" link-dark" href="/dsa/{{ year }}/all">
+                                    Batch of {{ year }}
                                 </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                                {% for branch in branches %}
+                                        <li class="list-group-item">
+                                            <a style="text-decoration: none;" class=" link-dark" href="/dsa/{{ year }}/{{ branch }}">
+                                                {{ branch }}
+                                            </a>
+                                        </li>
+                                {% endfor %}
+                            </ul>
                         {% endfor %}
                     </ul>
                 </div>

@@ -29,15 +29,15 @@
         <div class="container-fluid p-3 mx-4 gx-5">
             <div class="row gx-5">
                 {% for club in clubs %}
-                <div class="col-md-3 p-3 shadow  m-5" id="event_box">
-                    <div class="">
-                        <h3>
-                            <a class="link-dark" style="text-decoration: none;" href="{{ secy/{{ club }} }}">
-                                {{ club }}
-                            </a>
-                        </h3>
+                    <div class="col-md-3 p-3 shadow  m-5" id = "event_box">
+                        <div class="">
+                            <h3>
+                                <a class="link-dark" style="text-decoration: none;" href="{{ secy/{{ club }} }}">
+                                    {{ club }}
+                                </a>
+                            </h3>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
