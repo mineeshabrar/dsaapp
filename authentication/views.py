@@ -16,13 +16,15 @@ def login_view(request):
         print("user email: " + request.user.email)
         if isHead(request):
             club_name = get_club_name(request.user.email)
+            request.session["role"]="secy"+" "+club_name
             return redirect(f"secy/{club_name}")
 
         elif isDSA(request):
-            request.session["role"]="DSA"
+            request.session["role"]="dsa"
             return redirect("dsa/")
 
         else:
+            request.session["role"]="student"
             return redirect("student/")
 
     else:
