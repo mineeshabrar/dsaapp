@@ -1,5 +1,6 @@
 from .conf import *
 
+
 def get_student_details(sid):
     collection_name = db["students"]
     students = collection_name.find({})
