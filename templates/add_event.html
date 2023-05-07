@@ -51,19 +51,39 @@
       
         <ul class="nav flex-column bg-white mb-0">
           <li class="nav-item">
+            {%if role != 'dsa' and role != 'student'%}
             <a href="/secy/{{club_name}}" class="nav-link text-dark font-italic ">
-                      Dashboard
-                  </a>
+              Dashboard
+            </a>
+            {%elif role == 'dsa'%}
+            <a href="/dsa/" class="nav-link text-dark font-italic ">
+              Dashboard
+            </a>
+            {%else%}
+            <a href="/student/" class="nav-link text-dark font-italic ">
+              Dashboard
+            </a>
+            {%endif%}
+
           </li>
           <li class="nav-item">
+            {%if role != 'dsa' and role != 'student'%}
             <a href="/secy/{{club_name}}/add_event/" class="nav-link text-dark font-italic ">
                     Add Event
             </a>
+            {%elif role == 'dsa'%}
+            <a href="/dsa/add_event/" class="nav-link text-dark font-italic ">
+              Add Event
+            </a>
+            {%endif%}
+
           </li>
           <li class="nav-item">
+            {%if role != 'dsa' and role != 'student'%}
             <a href="/secy/proficiency_list/{{ club_name }}" class="nav-link text-dark font-italic ">
                     View Proficiency Students
             </a>
+            {%endif%}
           </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link text-dark font-italic ">
