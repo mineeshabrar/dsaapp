@@ -29,7 +29,7 @@
   background-size: cover;
   justify-content: center;
   /* background-image: url("/static/images/Background.png"); */
-  background-color: #F4E1F9;
+  background-color: #f4e1f9;
   background-position: center;
 }
 .home-image {
@@ -182,9 +182,53 @@
   border: none;
 }
 
+.club-card {
+  width: 20rem;
+  word-wrap: break-word;
+  margin: 3rem;
+}
+
+.club-card:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
+
+.club-card-header {
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
 .custom-navbar {
   background-color: #4b2e70;
 }
 .nav-text {
   color: white;
+}
+
+body {
+  background: rgb(237, 224, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(237, 224, 254, 1) 0%,
+    rgba(246, 231, 238, 1) 20%,
+    rgba(234, 242, 244, 1) 100%
+  );
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgb(234, 242, 244);
+  background: linear-gradient(
+    90deg,
+    rgba(234, 242, 244, 1) 0%,
+    rgba(246, 231, 238, 1) 100%,
+    rgba(245, 231, 239, 1) 100%,
+    rgba(237, 224, 254, 1) 100%
+  );
+  color: white;
+  text-align: center;
 }

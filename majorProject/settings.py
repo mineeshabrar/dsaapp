@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-g$wgy1mvo045!+jn799!s!6al6q36dof$kp(q4ap#p&r(=86s2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,11 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_createsuperuser',
     'authentication',
     'heads',
     'student',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -57,7 +57,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 ROOT_URLCONF = 'majorProject.urls'
 
@@ -90,10 +93,26 @@ DATABASES = {
     },
     'student': {
         'ENGINE': 'djongo',
-        'NAME': 'dsaapp-db',
+        'NAME': 'dsa-app',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://localhost:27017/?retryWrites=true&w=majority'
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
+        }
+    },
+    'heads': {
+        'ENGINE': 'djongo',
+        'NAME': 'dsa-app',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
+        }
+    },
+    'dsa': {
+        'ENGINE': 'djongo',
+        'NAME': 'dsa-app',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://mineeshabrar:mineeshabrar@e-curricular.sv9lmse.mongodb.net/?retryWrites=true&w=majority'
         }
     },
     'authentication': {
@@ -139,9 +158,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+if DEBUG:
+   STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+   ]
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -153,9 +175,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-#787781755043-a0biko81tatu6rj4ur8g4q8lcvkmffvr.apps.googleusercontent.com
-#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
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -164,6 +183,10 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
+        },
+        'APP': {
+            'client_id': "787781755043-a0biko81tatu6rj4ur8g4q8lcvkmffvr.apps.googleusercontent.com",
+            'secret': "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",
         },
     }
 }

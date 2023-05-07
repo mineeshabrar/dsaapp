@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <section class="vh-100" style="background-image: url('/static/images/Background.png')">
+  <section class="vh-100">
     <nav class="custom-navbar navbar">
       <div class="container-fluid custom-navbar">
         <a class="navbar-brand nav-text" href="#">{{ event.name }}</a>
@@ -28,49 +28,41 @@
       <div class="row gx-5">
         <p>{{ event.description }}</p>
         <br><br>
-        <h5>Participants</h5>
-        {% for student in event.event_participation %}
-        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
-          <li class="list-group-item">{{ student }}</li>
-        </a>
-        {% endfor %}
-        <br><br>
-        <h5>Organizers</h5>
+      {% if isHead %}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 p-3">
+              <h5>Organizers</h5>
         {% for student in event.event_organization %}
         <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
           <li class="list-group-item">{{ student }}</li>
         </a>
         {% endfor %}
-
-        <br><br>
+            </div>
+            <div class="col-md-6 p-3">
+              <h5>Participants</h5>
+        {% for student in event.event_participation %}
+        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+          <li class="list-group-item">{{ student }}</li>
+        </a>
+        {% endfor %}
+            </div>
+          </div>
+        </div>
         <h5>Sanction</h5>
         <p>{{ event.sanction }}</p>
 
         <br><br>
         <h5>Sponsorship</h5>
         <p>{{ event.sponsorship }}</p>
-
+      {% endif %}
         <br><br>
         <h5>College Level</h5>
         <p>{{ event.college_level }}</p>
-        
-        <!-- <div class="col-md-4">
-            <div class="card m-5">
-              <div class="card-body">
-                <h5 class="card-title">Events Conducted</h5>
-                <h6 class="card-subtitle mb-2 text-muted">2022-23</h6>
-                <p class="card-text">
-                  <ul>
-                    <li>Raunakan</li>
-                    <li>Chords</li>
-                    <li>Dastak</li>
-                  </ul>
-                </p>
-        
-                <a href="#" class="card-link">Certificates</a>
-              </div>
-            </div>
-          </div> -->
+
+        <br><br>
+        <h5>Date</h5>
+        <p>{{ event.date }}</p>
       </div>
     </div>
     </div>

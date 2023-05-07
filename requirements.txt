@@ -8,3 +8,9 @@ pytz==2023.3
 setuptools==65.5.0
 sqlparse==0.2.4
 tzdata==2023.3
+django-allauth
+pandas
+gunicorn
+xlsxwriter
+WhiteNoise
+django-createsuperuser

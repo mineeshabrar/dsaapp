@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Student Profile</title>
+    <title>DSA Dashboard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <section class="vh-100" style="background-image: url('/static/images/Background.png')">
+    <section class="vh-100">
         <nav class="custom-navbar navbar">
             <div class="container-fluid custom-navbar">
-                <a class="navbar-brand nav-text" href="#">DSA</a>
+                <a class="navbar-brand nav-text" href="#">DSA Dashboard</a>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ml-auto">
@@ -26,27 +26,25 @@
         </nav>
 
         <div class="col-12 text-center mt-2">
-            <a href="add_event/"><button type="submit" class="btn btn-primary align-self-center pink-button px-3">
-                    Add Events</button></a>
+            <a href="add_event/">
+                <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                    Click here to add a New Event
+                </button>
+            </a>
         </div>
-
-        <div class="container-fluid p-3 mx-4 gx-5">
-            <div class="row gx-5">
-
-                <div class="overflow-auto">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Student List</li>
-                        <!-- send data of all students here -->
-                        {% for student in students %}
-                        <a style="text-decoration: none;" class=" link-dark" href="/student/{{student.sid}}">
-                            <li class="list-group-item">{{ student.sid }} {{ student.name }} {{ student.points }}</li>
-                        </a>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <div class="col-12 text-center mt-2">
+            <a href="view_all_clubs/">
+                <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                    View all the Clubs
+                </button>
+            </a>
         </div>
-
+        <div class="col-12 text-center mt-2">
+            <a href="students_grouped/">
+                <button type="submit" class="btn btn-primary align-self-center pink-button px-3">
+                    View Students List
+                </button>
+            </a>
         </div>
     </section>
 </body>

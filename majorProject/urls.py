@@ -1,18 +1,3 @@
-"""majorProject URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include, re_path
 from student.views import *
@@ -21,17 +6,26 @@ from heads.views import *
 from dsa.views import *
 
 urlpatterns = [
+    re_path(r'^.*logout\/$', logout_view),
     path('admin/', admin.site.urls),
     path('', login_view),
     path('student/', student_view_data),
     path('student/<str:sid>/', student_final_view_data),
+    path('student/<str:sid>/organized_events/', student_final_view_data),
+    path('student/<str:sid>/participated_events/', student_final_view_data),
     path('accounts/', include("allauth.urls")),
-    path('secy/', secy_view),
-    path('secy/add_event/', secy_add_event),
-    path('secy/<str:event_id>', event_details),
-    path('secy/saveData/', secy_add_event_data, name= 'saveAddEventData'),
+    path('secy/proficiency_list/<str:club_name>/', proficiency_list),
+    path('secy/download_excel', download_prof),
+    path('secy/saveData/', secy_add_event_data, name='saveAddEventData'),
+    path('secy/<str:club_name>', secy_view),
+    path('secy/<str:club_name>/add_event/', secy_add_event),
+    path('secy/<str:club_name>/<str:event_id>/', event_details),
     path('dsa/', dsa_view),
-    path('dsa/<str:event_id>', event_details),
     path('dsa/add_event/', dsa_add_event),
-    re_path(r'^.*logout\/$', logout_view)
+    path('dsa/download_excel/<str:club_name>/', download_excel),
+    path('dsa/students_grouped/', students_grouped),
+    path('dsa/view_all_clubs/', view_all_clubs),
+    path('dsa/<str:event_id>/', event_details),
+    path('dsa/<str:year>/<str:branch>/', view_student_list),
+    
 ]
