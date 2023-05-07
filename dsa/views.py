@@ -106,4 +106,3 @@ def dsa_view(request):
         return render(request, "dsa_landing_page.html")
     else:
         return redirect("/")
-    
