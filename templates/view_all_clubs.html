@@ -2,6 +2,48 @@
 <html lang="en">
   <head>
     <title>Clubs</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+              margin-top:50px;
+      }
+  
+      .card {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+      }
+  
+      .card img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+  
+      .card h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+      }
+  
+      .card p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #666;
+        line-height: 1.5;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
@@ -10,11 +52,11 @@
     <link href="/static/css/home.css?version=1" rel="stylesheet" />
   </head>
 
-  <body>
-    <section class="vh-100">
-      <nav class="custom-navbar navbar">
-        <div class="container-fluid custom-navbar">
-          <a class="navbar-brand nav-text" href="#">Clubs</a>
+<body>
+  <section class="vh-100">
+    <nav class="custom-navbar navbar">
+      <div class="container-fluid custom-navbar">
+        <a class="navbar-brand nav-text" href="#">Clubs</a>
 
           <ul class="navbar-nav ms-auto">
             <li class="nav-item ml-auto">
@@ -23,33 +65,18 @@
           </ul>
         </div>
       </nav>
-      <div>
-        <div
-          style="
-            display: flex;
-            width: 98vw !important;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-          "
-        >
-          {% for club in clubs %}
-          <div class="col-md-3 shadow m-5 club-card" id="event_box">
-            <a
-              class="link-dark"
-              style="text-decoration: none"
-              href="/secy/{{ club.club_name }}"
-            >
-              <div class="" style="padding: 3rem">
-                <div class="club-card-header">
-                  {{ club.club_name|slice:"0:10"}}
-                </div>
-              </div>
+      <div class="container">
+        {% for club in clubs %}
+        <div class="card">
+            <a  href="/secy/{{ club.club_name }}">
+            <img src="https://via.placeholder.com/150" alt="Student Name">
+            <h3> {{ club.club_name|slice:"0:10"}}</h3>
+            
             </a>
-          </div>
-          {% endfor %}
         </div>
+        {% endfor %}
+        
       </div>
     </section>
   </body>
-</html>
+</html> 

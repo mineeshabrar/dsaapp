@@ -28,24 +28,24 @@
       <div class="row gx-5">
         <p>{{ event.description }}</p>
         <br><br>
-      {% if isHead %}
+        {% if isHead %}
         <div class="container">
           <div class="row">
             <div class="col-md-6 p-3">
               <h5>Organizers</h5>
-        {% for student in event.event_organization %}
-        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
-          <li class="list-group-item">{{ student }}</li>
-        </a>
-        {% endfor %}
+              {% for student in event.event_organization %}
+              <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+                <li class="list-group-item">{{ student }}</li>
+              </a>
+              {% endfor %}
             </div>
             <div class="col-md-6 p-3">
               <h5>Participants</h5>
-        {% for student in event.event_participation %}
-        <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
-          <li class="list-group-item">{{ student }}</li>
-        </a>
-        {% endfor %}
+              {% for student in event.event_participation %}
+              <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student }}">
+                <li class="list-group-item">{{ student }}</li>
+              </a>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
         <br><br>
         <h5>Sponsorship</h5>
         <p>{{ event.sponsorship }}</p>
-      {% endif %}
+        {% endif %}
         <br><br>
         <h5>College Level</h5>
         <p>{{ event.college_level }}</p>

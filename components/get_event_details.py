@@ -1,5 +1,6 @@
 from .conf import *
 
+
 def get_event_details(event_id):
     collection_name = db["events"]
     events = collection_name.find({})

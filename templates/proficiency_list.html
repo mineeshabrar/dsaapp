@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    {% load static %}
-    <title>Secretary Dashboard</title>
-    <meta charset="utf-8" />
+  {% load static %}
+  <title>Secretary Dashboard</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   {% load static %}
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
@@ -30,7 +30,53 @@
             background-color: #555;
             color: white;
           }
+          .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top:20px;
+            justify-content: right;
+            align-items: flex-start;
+          }
+      
+          .card {
+            width: 200px;
+            height: 150px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+      
+          .card .info {
+            margin-top: 20px;
+            box-sizing: border-box;
+            width: 100%;
+          }
+      
+          .card h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+          }
+      
+          .card p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+          }
     </style>
+   
 </head>
 
 <body>
@@ -60,25 +106,33 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/secy/download_excel" class="nav-link text-dark font-italic ">
+                    Download All Members of Club
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/logout" class="nav-link text-dark font-italic ">
                       Log Out
                   </a>
           </li>
         </ul>
       </div>
-      <div style="margin-left:25%;padding:1px 16px;height:1000px;">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="container mt-5 me-5 px-3 py-3 pink-box">
-              {% for student in students %}
-              <a style="text-decoration: none;" class=" link-dark" href="/student/{{ student.sid }}">
-                <li class="list-group-item">{{ student.name }} {{ student.sid }}</li>
-              </a>
-              {% endfor %}
-            </div>
+ 
+      <div class="container">
+        {% for student in students %}
+        <a href="/student/{{ student.sid }}">
+        <div class="card">
+          <div class="info">
+            <h3>{{ student.name }}</h3>
+            <p>{{ student.sid }}</p>
+  
           </div>
+          
         </div>
+      </a>
+        {% endfor %}
+       
+      
       </div>
     </div>
 </body>
