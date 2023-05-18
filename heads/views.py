@@ -127,7 +127,11 @@ def secy_add_event_data(request):
         event_name = (request.POST["EventName"]).title()
         event_description = (request.POST["EventDescription"]).capitalize()
         sanction = request.POST["CollegeSanction"]
+        if(sanction == ""):
+            sanction = "NA"
         sponsorship = request.POST["Sponsorship"]
+        if(sponsorship == ""):
+            sponsorship = "NA"
         college_level = request.POST["College"]
         ParticipantCount = request.POST["ParticipantCount"]
         organisersFile = request.FILES["organisersFile"].read()
