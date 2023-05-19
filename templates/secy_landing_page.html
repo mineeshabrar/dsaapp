@@ -112,6 +112,9 @@
               <p>{{ event.description }}</p>
             </div>
           </div>
+          {% if isDSA == True%}
+          <button onclick = "location.href='{% url 'delete-event' club_name event.event_id %}'" type="button"> Delete Event </button>
+          {% endif %}
         </div>
       </div>
       {% endfor %}

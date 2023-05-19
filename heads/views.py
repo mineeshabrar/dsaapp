@@ -118,6 +118,19 @@ def secy_view(request, club_name):
                 {"club_name": club_name, "events": events, "isDSA" : isDSA(request)},
             )
 
+def delete_event (request, club_name, event_id):
+    collection_name = db["events"]
+    collection_name.delete_one({ "event_id" : event_id})
+
+    collection_name = db["societies"]
+    clubs = collection_name.find({})
+
+    for club in clubs:
+        if club["club_name"] == club_name:
+            club["events"].remove(event_id)
+            collection_name.update_one({"club_name": club_name}, {"$set": club})
+            return redirect("/secy/{}".format((club_name)))
+    return redirect("/secy/{}".format((club_name)))
 
 @login_required(login_url="/")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)

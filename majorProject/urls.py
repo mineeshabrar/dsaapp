@@ -27,4 +27,5 @@ urlpatterns = [
     path("dsa/view_all_clubs/", view_all_clubs),
     path("dsa/<str:event_id>/", event_details),
     path("dsa/<str:year>/<str:branch>/", view_student_list),
+    path("dsa/deleteEvent/<str:club_name>/<str:event_id>/", delete_event, name="delete-event"),
 ]
