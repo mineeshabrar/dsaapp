@@ -12,6 +12,7 @@ from django.http import HttpResponse
 import io
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from dsa.views import isDSA
 
 
 def isHead(request):
@@ -114,7 +115,7 @@ def secy_view(request, club_name):
             return render(
                 request,
                 "secy_landing_page.html",
-                {"club_name": club_name, "events": events},
+                {"club_name": club_name, "events": events, "isDSA" : isDSA(request)},
             )
 
 
