@@ -144,9 +144,9 @@
               <div class="col-md-4">
                 <label for="inputPassword4" class="form-label">Event Level</label>
                 <select id="participantsCheck" class="form-select" name="College" required>
-                  <option selected>PEC</option>
-                  <option>NIT</option>
-                  <option>IIT</option>
+                  <option selected>PEC and other institutes</option>
+                  <option>Premier institutes like IITs,NITs,IIMs,IIITs,IISc,AIIMS, etc.</option>
+                  <option>International(held outside India)</option>
                 </select>
               </div>
 
@@ -164,6 +164,12 @@
                     </label>
                     <p>(all the SIDs should be in a single column titled 'SID')</p>
                     <input class="form-control" type="file" id="formFile" name="participantsFile" required>
+                    <br>
+
+                    <label for="formFile" class="form-label" accept=".xls, .xlsx"> Upload Excel File of Awardees' SIDs
+                    </label>
+                    <p>(all the SIDs should be in a single column titled 'SID')</p>
+                    <input class="form-control" type="file" id="formFile" name="awardeesFile" required>
                     <br>
 
                     <label for="formFile" class="form-label" accept=".jpg, .png, .jpeg"> Upload a "Square" Poster for

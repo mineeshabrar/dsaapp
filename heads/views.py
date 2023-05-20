@@ -120,6 +120,63 @@ def secy_view(request, club_name):
 
 def delete_event (request, club_name, event_id):
     collection_name = db["events"]
+    events = collection_name.find({})
+
+    collection_name = db["students"]
+    students = collection_name.find({})
+
+    for event in events:
+        if( event["event_id"] == event_id):
+            organisersList = event["event_organization"]
+            participantsList = event["event_participation"]
+            # awardeesList = event["event_awards"]
+
+            organizationMarks = 2
+            participationMarks = 1
+            # awardMarks = 2
+
+            # if(event["participationGreaterThan250"] == "Yes"):
+            #     organizationMarks = 4
+
+            if(event["college_level"] == "Premier institutes like IITs,NITs,IIMs,IIITs,IISc,AIIMS, etc."):
+                participationMarks = 3
+                # awardMarks = 6
+        
+            elif(event["college_level"] == "International(held outside India)"):
+                participationMarks = 6
+                # awardMarks = 8
+
+            for student in students:
+                if student["sid"] in organisersList:
+
+                    student["points"] = str(int(student["points"]) - organizationMarks)
+                    student["events_organization"].remove(event_id)
+
+                    collection_name.update_one(
+                    {"sid": student["sid"]}, {"$set": student}
+                    )
+                
+                if student["sid"] in participantsList:
+
+                    student["points"] = str(int(student["points"]) - participationMarks)
+                    student["events_participation"].remove(event_id)
+
+                    collection_name.update_one(
+                    {"sid": student["sid"]}, {"$set": student}
+                    )
+
+                # if student["sid"] in awardeesList:
+
+                #     student["points"] = str(int(student["points"]) - awardMarks)
+
+                #     collection_name.update_one(
+                #     {"sid": student["sid"]}, {"$set": student}
+                #     )
+
+                break
+
+
+    collection_name = db["events"]
     collection_name.delete_one({ "event_id" : event_id})
 
     collection_name = db["societies"]
@@ -150,13 +207,32 @@ def secy_add_event_data(request):
         ParticipantCount = request.POST["ParticipantCount"]
         organisersFile = request.FILES["organisersFile"].read()
         participantsFile = request.FILES["participantsFile"].read()
+        awardeesFile = request.FILES["awardeesFile"].read()
         event_date_temp = request.POST["EventDate"]
         # convert date to dd-mm-yyyy
         event_date_temp = event_date_temp.split("-")
         event_date = (
             event_date_temp[2] + "-" + event_date_temp[1] + "-" + event_date_temp[0]
         )
+        
+        organizationMarks = 2
+        participationMarks = 1
+        awardMarks = 2
 
+        if(ParticipantCount == "Yes"):
+            organizationMarks = 4
+
+        #college level
+        if(college_level == "Premier institutes like IITs,NITs,IIMs,IIITs,IISc,AIIMS, etc."):
+            participationMarks = 3
+            awardMarks = 6
+        
+        elif(college_level == "International(held outside India)"):
+            participationMarks = 6
+            awardMarks = 8
+
+
+        #organizera,participants and awardees
         df = pd.read_excel(organisersFile, usecols=[0])
         organisersList = df["SID"].tolist()
         organisersList = [str(x) for x in organisersList]
@@ -166,6 +242,11 @@ def secy_add_event_data(request):
         participantsList = df["SID"].tolist()
         participantsList = [str(x) for x in participantsList]
         print("Participants List: {}".format(participantsList))
+
+        df = pd.read_excel(participantsFile, usecols=[0])
+        awardeesList = df["SID"].tolist()
+        awardeesList = [str(x) for x in awardeesList]
+        print("Awardees List: {}".format(awardeesList))
 
         club_name = get_club_name(request.user.email)
         event_id = ""
@@ -222,6 +303,12 @@ def secy_add_event_data(request):
                 for student in students:
                     if student["sid"] in organisersList:
                         student["events_organization"].append(event_id)
+
+                        if(student["points"] == ""):
+                            student["points"] = "0"
+
+                        student["points"] = str(int(student["points"]) + organizationMarks)
+
                         print(student["events_organization"])
                         collection_name.update_one(
                             {"sid": student["sid"]}, {"$set": student}
@@ -229,6 +316,15 @@ def secy_add_event_data(request):
 
                     if student["sid"] in participantsList:
                         student["events_participation"].append(event_id)
+
+                        if(student["points"] == ""):
+                            student["points"] = "0"
+                        
+                        student["points"] = str(int(student["points"]) + participationMarks)
+
+                        if student["sid"] in awardeesList:
+                            student["points"] = str(int(student["points"]) + awardMarks)
+
                         print(student["events_participation"])
                         collection_name.update_one(
                             {"sid": student["sid"]}, {"$set": student}
