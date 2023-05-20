@@ -150,7 +150,7 @@ def delete_event (request, club_name, event_id):
                 if student["sid"] in organisersList:
 
                     student["points"] = str(int(student["points"]) - organizationMarks)
-                    student["events_organization"].remove(event_id)
+                    student["events_participation"].remove(event_id)
 
                     collection_name.update_one(
                     {"sid": student["sid"]}, {"$set": student}
