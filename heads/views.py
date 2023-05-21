@@ -129,28 +129,28 @@ def delete_event (request, club_name, event_id):
         if( event["event_id"] == event_id):
             organisersList = event["event_organization"]
             participantsList = event["event_participation"]
-            # awardeesList = event["event_awards"]
+            awardeesList = event["event_awards"]
 
             organizationMarks = 2
             participationMarks = 1
-            # awardMarks = 2
+            awardMarks = 2
 
-            # if(event["participationGreaterThan250"] == "Yes"):
-            #     organizationMarks = 4
+            if(event["participants_greater_than_250"] == "Yes"):
+                organizationMarks = 4
 
             if(event["college_level"] == "Premier institutes like IITs,NITs,IIMs,IIITs,IISc,AIIMS, etc."):
                 participationMarks = 3
-                # awardMarks = 6
+                awardMarks = 6
         
             elif(event["college_level"] == "International(held outside India)"):
                 participationMarks = 6
-                # awardMarks = 8
+                awardMarks = 8
 
             for student in students:
                 if student["sid"] in organisersList:
 
                     student["points"] = str(int(student["points"]) - organizationMarks)
-                    student["events_participation"].remove(event_id)
+                    student["events_organization"].remove(event_id)
 
                     collection_name.update_one(
                     {"sid": student["sid"]}, {"$set": student}
@@ -165,13 +165,13 @@ def delete_event (request, club_name, event_id):
                     {"sid": student["sid"]}, {"$set": student}
                     )
 
-                # if student["sid"] in awardeesList:
+                if student["sid"] in awardeesList:
 
-                #     student["points"] = str(int(student["points"]) - awardMarks)
+                    student["points"] = str(int(student["points"]) - awardMarks)
 
-                #     collection_name.update_one(
-                #     {"sid": student["sid"]}, {"$set": student}
-                #     )
+                    collection_name.update_one(
+                    {"sid": student["sid"]}, {"$set": student}
+                    )
 
                 break
 
@@ -204,7 +204,7 @@ def secy_add_event_data(request):
         if(sponsorship == ""):
             sponsorship = "NA"
         college_level = request.POST["College"]
-        ParticipantCount = request.POST["ParticipantCount"]
+        participationGreaterThan250 = request.POST["ParticipantCount"]
         organisersFile = request.FILES["organisersFile"].read()
         participantsFile = request.FILES["participantsFile"].read()
         awardeesFile = request.FILES["awardeesFile"].read()
@@ -219,7 +219,7 @@ def secy_add_event_data(request):
         participationMarks = 1
         awardMarks = 2
 
-        if(ParticipantCount == "Yes"):
+        if(participationGreaterThan250 == "Yes"):
             organizationMarks = 4
 
         #college level
@@ -283,7 +283,8 @@ def secy_add_event_data(request):
                     "description": event_description,
                     "event_organization": organisersList,
                     "event_participation": participantsList,
-                    "participants_greater_than_250": ParticipantCount,
+                    "event_awards": awardeesList,
+                    "participants_greater_than_250": participationGreaterThan250,
                     "event_id": event_id,
                     "sanction": sanction,
                     "sponsorship": sponsorship,
@@ -324,6 +325,7 @@ def secy_add_event_data(request):
 
                         if student["sid"] in awardeesList:
                             student["points"] = str(int(student["points"]) + awardMarks)
+                            student["events_awards"].append(event_id)
 
                         print(student["events_participation"])
                         collection_name.update_one(
