@@ -28,4 +28,5 @@ urlpatterns = [
     path("dsa/<str:event_id>/", event_details),
     path("dsa/<str:year>/<str:branch>/", view_student_list),
     path("dsa/deleteEvent/<str:club_name>/<str:event_id>/", delete_event, name="delete-event"),
+    path("dsa/saveData/", dsa_add_event_data, name="saveAddEventDataDSA"),
 ]

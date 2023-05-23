@@ -61,7 +61,7 @@ def event_details(request, event_id, club_name=""):
         return redirect("/")
     event = get_event_details(event_id)
     return render(
-        request, "event_view.html", {"event": event, "isHead": isHead(request)}
+        request, "event_view.html", {"event": event, "isHead": isHead(request), "isDSA": isDSA(request)}
     )
 
 
@@ -243,7 +243,7 @@ def secy_add_event_data(request):
         participantsList = [str(x) for x in participantsList]
         print("Participants List: {}".format(participantsList))
 
-        df = pd.read_excel(participantsFile, usecols=[0])
+        df = pd.read_excel(awardeesFile, usecols=[0])
         awardeesList = df["SID"].tolist()
         awardeesList = [str(x) for x in awardeesList]
         print("Awardees List: {}".format(awardeesList))
