@@ -237,16 +237,22 @@ def secy_add_event_data(request):
         df = pd.read_excel(organisersFile, usecols=[0])
         organisersList = df["SID"].tolist()
         organisersList = [str(x) for x in organisersList]
+        if (all(element == organisersList[0] for element in organisersList)):
+            organisersList = []
         print("Organisers List: {}".format(organisersList))
 
         df = pd.read_excel(participantsFile, usecols=[0])
         participantsList = df["SID"].tolist()
         participantsList = [str(x) for x in participantsList]
+        if (all(element == participantsList[0] for element in participantsList)):
+            participantsList = []
         print("Participants List: {}".format(participantsList))
 
         df = pd.read_excel(awardeesFile, usecols=[0])
         awardeesList = df["SID"].tolist()
         awardeesList = [str(x) for x in awardeesList]
+        if (all(element == awardeesList[0] for element in awardeesList)):
+            awardeesList = []
         print("Awardees List: {}".format(awardeesList))
 
         club_name = get_club_name(request.user.email)
