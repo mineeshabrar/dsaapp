@@ -95,11 +95,13 @@
                       Dashboard
                   </a>
           </li>
+          {% if isHead == True%}
           <li class="nav-item">
             <a href="/secy/{{ club_name }}/add_event/" class="nav-link text-dark font-italic ">
                     Add Event
             </a>
           </li>
+          {%  endif %}
           <li class="nav-item">
             <a href="/secy/proficiency_list/{{ club_name }}" class="nav-link text-dark font-italic ">
                     View Proficiency Students
