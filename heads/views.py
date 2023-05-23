@@ -57,8 +57,8 @@ def download_prof(request):
 @login_required(login_url="/")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def event_details(request, event_id, club_name=""):
-    if request.session["role"] == "student":
-        return redirect("/")
+    # if request.session["role"] == "student":
+    #     return redirect("/")
     event = get_event_details(event_id)
     return render(
         request, "event_view.html", {"event": event, "isHead": isHead(request), "isDSA": isDSA(request)}
