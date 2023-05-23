@@ -89,7 +89,7 @@ def proficiency_list(request, club_name):
     return render(
         request,
         "proficiency_list.html",
-        {"students": proficiency_list, "club_name": club_name},
+        {"students": proficiency_list, "club_name": club_name, "isHead": isHead(request)},
     )
 
 
